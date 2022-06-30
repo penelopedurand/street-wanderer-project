@@ -24,7 +24,7 @@ end
 
     private
     def user_params
-        params.permit(:username, :password)
+        params.permit(:username, :password, :password_confirmation)
     end
 
     def invalid (exception)
