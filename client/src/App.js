@@ -1,5 +1,5 @@
 import { useHistory, useState, useEffect } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Router, Route } from "react-router-dom";
 import Login from "./Login";
 import Signup from "./Signup";
 import Home from "./Home";
@@ -37,27 +37,27 @@ function App() {
       <div className="header">
         <Header user={user} />
       </div>
-      <BrowserRouter>
-        <div className="App">
-          <Switch>
-            <Route exact path="/">
-              <Login setUser={setUser} setIsAuthenticated={setIsAuthenticated} />
-            </Route>
-            <Route exact path="/signup">
-              <Signup />
-            </Route>
-            <Route exact path="/home">
-              <Home />
-            </Route>
-            <Route exact path="/new_sighting_of_wanderer">
-              <NewSighting />
-            </Route>
-            <Route exact path="/markers/:id/cats">
-              <CatProfile />
-            </Route>
-          </Switch>
-        </div>
-      </BrowserRouter>
+      {/* <BrowserRouter> */}
+      <div className="App">
+        <Switch>
+          <Route exact path="/login">
+            <Login setUser={setUser} setIsAuthenticated={setIsAuthenticated} />
+          </Route>
+          <Route exact path="/signup">
+            <Signup />
+          </Route>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route exact path="/new_sighting_of_wanderer">
+            <NewSighting />
+          </Route>
+          <Route exact path="/markers/:id/cats">
+            <CatProfile />
+          </Route>
+        </Switch>
+      </div>
+      {/* </BrowserRouter> */}
     </>
   );
 }

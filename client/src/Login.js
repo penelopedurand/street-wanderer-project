@@ -5,7 +5,7 @@ import React from 'react'
 function Login({ setUser, setIsAuthenticated }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState('')
-    const history = useHistory()
+
     const [error, setError] = useState('')
 
     function handleSubmit(e) {
@@ -29,7 +29,7 @@ function Login({ setUser, setIsAuthenticated }) {
                             setUser(user)
                             setIsAuthenticated(true)
                         })
-                        .then(history.push("/characters"))
+                        .then(history.push("/home"))
 
                 } else {
                     res.json()
@@ -38,15 +38,16 @@ function Login({ setUser, setIsAuthenticated }) {
             })
     }
 
+    const history = useHistory()
 
-
-    function handleGoToSignUp(e) {
-        e.preventDefault()
+    function handleGoToSignUp() {
+        // e.preventDefault()
         history.push("/signup")
     }
 
     return (
         <div className='login'>
+            <h3>LOGIN</h3>
             <form onSubmit={handleSubmit} >
                 <label htmlFor="username" className="username-2">Username:  </label>
                 <input
@@ -61,6 +62,7 @@ function Login({ setUser, setIsAuthenticated }) {
                     onChange={(e) => setPassword(e.target.value)}
                 />
                 <button type="submit" className="multi-purpose-button">Login</button>
+                <br></br>
                 <button type="login-button" className="multi-purpose-button" onClick={handleGoToSignUp}>Click Here to Signup</button>
             </form>
             {error ? <div>{error}</div> : null}
