@@ -40,33 +40,43 @@ function Login({ setUser, setIsAuthenticated }) {
 
     const history = useHistory()
 
-    function handleGoToSignUp() {
-        // e.preventDefault()
+    function handleGoToSignUp(e) {
+        e.preventDefault()
         history.push("/signup")
     }
 
     return (
-        <div className='login'>
-            <h3>LOGIN</h3>
-            <form onSubmit={handleSubmit} >
-                <label htmlFor="username" className="username-2">Username:  </label>
-                <input
-                    type="text"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                /><br></br>
-                <label className="password-2">Password:  </label>
-                <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-                <button type="submit" className="multi-purpose-button">Login</button>
-                <br></br>
-                <button type="login-button" className="multi-purpose-button" onClick={handleGoToSignUp}>Click Here to Signup</button>
-            </form>
-            {error ? <div>{error}</div> : null}
-        </div>
+        <>
+            <div className='cat-background'>
+                <span id="cielo"></span>
+                <span id="luna"></span>
+                <div id="gato"></div>
+                <span id="muro"></span>
+                <span id="edificios"></span>
+
+                <div className='login'>
+                    <br></br>
+                    <form onSubmit={handleSubmit} className="login-form">
+                        <label htmlFor="username" className="username-2">Username:  </label>
+                        <input
+                            type="text"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                        /><br></br>
+                        <label className="password-2">Password:  </label>
+                        <input
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                        <button type="submit" className="multi-purpose-button">Login</button>
+                        <br></br>
+                        <button type="login-button" className="multi-purpose-button" onClick={handleGoToSignUp}>Click Here to Signup</button>
+                    </form>
+                    {error ? <div>{error}</div> : null}
+                </div>
+            </div>
+        </>
     );
 }
 

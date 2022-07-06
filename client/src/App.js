@@ -30,23 +30,25 @@ function App() {
 
   }, []);
 
+
   if (!isAuthenticated) return <Login error={'please log in'} setIsAuthenticated={setIsAuthenticated} setUser={setUser} />
 
   return (
-    <>
-      <div className="header">
-        <Header user={user} />
-      </div>
-      {/* <BrowserRouter> */}
-      <div className="App">
-        <Switch>
-          <Route exact path="/login">
-            <Login setUser={setUser} setIsAuthenticated={setIsAuthenticated} />
-          </Route>
+    <div>
+      <div id="marco">
+        <div className="header">
+          <Header user={user} />
+        </div>
+        <div className="App">
+          <div className="login">
+            <Route exact path="/">
+              <Login setUser={setUser} setIsAuthenticated={setIsAuthenticated} />
+            </Route>
+          </div>
           <Route exact path="/signup">
             <Signup />
           </Route>
-          <Route exact path="/">
+          <Route exact path="/home">
             <Home />
           </Route>
           <Route exact path="/new_sighting_of_wanderer">
@@ -55,10 +57,9 @@ function App() {
           <Route exact path="/markers/:id/cats">
             <CatProfile />
           </Route>
-        </Switch>
+        </div>
       </div>
-      {/* </BrowserRouter> */}
-    </>
+    </div >
   );
 }
 
