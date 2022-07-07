@@ -91,6 +91,9 @@ function App() {
       <Route exact path="/signup">
         <Signup />
       </Route>
+
+      {user ? (<Header user={user} handleLogout={handleLogout} />) : null}
+
       <Route exact path="/home">
         <Home />
       </Route>
@@ -105,7 +108,7 @@ function App() {
       </Route>
       <div>
         {user ? (<div className="map">
-          <Header user={user} handleLogout={handleLogout} />
+
           <ReactMapGL onClick={(e) => {
             setLng(e.lngLat.lng)
             setLat(e.lngLat.lat)
