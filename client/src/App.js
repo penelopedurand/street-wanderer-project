@@ -83,31 +83,29 @@ function App() {
 
   return (
     <div>
-      <div id="marco">
-        <Header user={user} handleLogout={handleLogout} />
-        <div className="App">
-          <Route exact path="/">
-            <Login setUser={setUser} setIsAuthenticated={setIsAuthenticated} />
-          </Route>
-        </div>
-        <Route exact path="/signup">
-          <Signup />
-        </Route>
-        <Route exact path="/home">
-          <Home />
-        </Route>
-        <Route exact path="/new_sighting_of_wanderer">
-          <NewMarker lng={lng} lat={lat} user={user} />
-        </Route>
-        <Route exact path="/markers/">
-          <CatContainer />
-        </Route>
-        <Route exact path="/markers/:id/cats">
-          <CatProfile />
+      <div className="App">
+        <Route exact path="/">
+          <Login setUser={setUser} setIsAuthenticated={setIsAuthenticated} />
         </Route>
       </div>
+      <Route exact path="/signup">
+        <Signup />
+      </Route>
+      <Route exact path="/home">
+        <Home />
+      </Route>
+      <Route exact path="/new_sighting_of_wanderer">
+        <NewMarker lng={lng} lat={lat} user={user} />
+      </Route>
+      <Route exact path="/markers/">
+        <CatContainer />
+      </Route>
+      <Route exact path="/markers/:id/cats">
+        <CatProfile />
+      </Route>
       <div>
         {user ? (<div className="map">
+          <Header user={user} handleLogout={handleLogout} />
           <ReactMapGL onClick={(e) => {
             setLng(e.lngLat.lng)
             setLat(e.lngLat.lat)
