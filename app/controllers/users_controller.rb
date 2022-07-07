@@ -1,17 +1,18 @@
 class UsersController < ApplicationController
-    # skip_before_action :authorize, only: :create
+    skip_before_action :authorize, only: :create
     rescue_from ActiveRecord::RecordInvalid, with: :invalid
+    # before_action :authenticate_user!, except: [:new,  :create]
 
  def create
     user = User.create!(user_params)
-    session[:current_user] = user.id
+    session[:user_id] = user.id
     render json: user, status: :created
   end
 
-  def index
-    users = User.all 
-    render json: users, status: :ok
-  end
+  # def index
+  #   users = User.all 
+  #   render json: users, status: :ok
+  # end
 
   def show
     # user = User.find_by(id: session[:current_user])

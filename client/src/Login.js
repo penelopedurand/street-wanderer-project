@@ -57,6 +57,7 @@ function Login({ setUser, setIsAuthenticated }) {
                 <div className='login'>
                     <br></br>
                     <form onSubmit={handleSubmit} className="login-form">
+                        <h3>Login to the Streets </h3>
                         <label htmlFor="username" className="username-2">Username:  </label>
                         <input
                             type="text"
