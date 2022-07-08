@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useHistory, Route, ReactRouter } from "react-router-dom";
+import { useHistory, Route, Link, ReactRouter } from "react-router-dom";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
 import 'mapbox-gl/dist/mapbox-gl.css';
 import Login from "./Login";
@@ -18,17 +18,18 @@ function App() {
   const [viewport, setViewport] = useState({
     latitude: 40.646905,
     longitude: -73.958142,
-    width: '90vw',
-    height: '90vh',
+    // width: '90vw',
+    // height: '90vh',
     zoom: 10
   })
 
   const [mapData, setMapData] = useState([])
   const [selectedMark, setSelectedMark] = useState(null)
   const [id, setId] = useState()
+  const [cats, setCats] = useState()
 
   const history = useHistory()
-
+  // console.log(lat)
   useEffect(() => {
     fetch('/me')
       .then((res) => {
@@ -40,18 +41,18 @@ function App() {
             });
         }
       });
-    // fetch('/home')
-    //   .then(res => res.json())
-    //   .then(setCats);
-
+    fetch('/cats')
+      .then(res => res.json())
+      .then(setCats);
   }, []);
+  // console.log(cats)
 
   // the useeffect for the map
   useEffect(() => {
 
     fetch("/markers")
       .then(resp => resp.json())
-      .then((data) => console.log(data))
+      .then((data) => setMapData(data))
 
   }, [])
 
@@ -60,7 +61,6 @@ function App() {
   }
 
   function markerButton(e, marks) {
-
     e.preventDefault()
     setId(marks.id)
     // setSelectedMark(marks.id)          
@@ -68,7 +68,6 @@ function App() {
       .then(resp => resp.json())
       .then((data) => setSelectedMark(data))
     // console.log(selectedMark)
-
   }
 
 
@@ -81,6 +80,28 @@ function App() {
       .then(history.push("/"));
   }
 
+  // delete the cat marker
+  function handleDelete() {
+    fetch(`/markers/${id}`, {
+      method: "DELETE"
+    })
+      // .then((res) => res.json())
+      .then(data => {//{console.log(data)
+        if (data.ok) {
+          // console.log(data)
+          setSelectedMark(null)
+          deleteId(id)
+        } else {
+          console.log("no")
+        }
+      })
+  }
+
+  function deleteId(deletedId) {
+    const updatedMap = mapData.filter(map => map.id !== deletedId)
+    setMapData(updatedMap)
+  }
+
   return (
     <div>
       <div className="App">
@@ -91,25 +112,28 @@ function App() {
       <Route exact path="/signup">
         <Signup />
       </Route>
-
-      {user ? (<Header user={user} handleLogout={handleLogout} />) : null}
-
-      <Route exact path="/home">
-        <Home />
-      </Route>
-      <Route exact path="/new_sighting_of_wanderer">
-        <NewMarker lng={lng} lat={lat} user={user} />
-      </Route>
-      <Route exact path="/markers/">
-        <CatContainer />
-      </Route>
-      <Route exact path="/markers/:id/cats">
-        <CatProfile />
-      </Route>
+      {user ? (<div>
+        <Header user={user} handleLogout={handleLogout} />
+        <Route exact path="/home">
+          <Home />
+        </Route>
+        <Route exact path="/new_sighting_of_wanderer">
+          <NewMarker lng={lng} lat={lat} newMarker={newMarker} user={user} />
+        </Route>
+        <Route exact path="/markers/">
+          <CatContainer cats={cats} />
+        </Route>
+        <Route exact path="/markers/:id/cats">
+          <CatProfile />
+        </Route>
+      </div>
+      ) : null}
       <div>
         {user ? (<div className="map">
 
           <ReactMapGL onClick={(e) => {
+            // console.log(e.lngLat.lng)
+            // console.log(e.lngLat.lat)
             setLng(e.lngLat.lng)
             setLat(e.lngLat.lat)
           }}
@@ -124,13 +148,36 @@ function App() {
                 key={marks.id}
                 longitude={marks.longitude} latitude={marks.latitude}
               >
-                {/* <button className="pin" onClick={e => markerButton(e, marks)}>
-                  <img src="./pin.png" />
-                  <img src="./map-marker-icon.png" />
-                </button> */}
+                <button className="pin" onClick={e => markerButton(e, marks)}>
+                  {/* <img src="./pets-icon.jpg" style={{ width: "1%", height: "1%" }} /> */}
+                  <img src="./pets-marker.png" />
+                </button>
               </Marker>
             ))}
+            {selectedMark ? (
+              <Popup
+                // latitude={40.715553207343646}
+                // longitude={-73.99283450881435}
+                latitude={selectedMark.latitude}
+                longitude={selectedMark.longitude}
+                onClose={() => setSelectedMark(null)}>
 
+                <div style={{ width: "auto", height: "auto" }}>
+                  <img style={{ height: "150px", width: "auto", marginTop: "5px" }} src={selectedMark.image}></img>
+                  <ul>
+                    <li>{selectedMark.description}</li>
+                    <li>Cat Number: {selectedMark.cat_id}</li>
+                  </ul>
+                  <Link to={`/markers/${id}/cats`}>
+                    <button>See More</button>
+                  </Link>
+
+                  {user ? (
+                    <button onClick={handleDelete}>Delete</button>
+                  ) : null}
+                </div>
+              </Popup>
+            ) : null}
           </ReactMapGL>
         </div>
         ) : <div></div>}

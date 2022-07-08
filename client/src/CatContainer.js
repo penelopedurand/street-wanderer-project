@@ -1,6 +1,6 @@
 import React from 'react'
 
-function CatContainer() {
+function CatContainer({ cats }) {
     return (
         <div>CatContainer</div>
     )

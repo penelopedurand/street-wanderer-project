@@ -10,6 +10,11 @@ html {
   font-family: 'Rubik Moonrocks', cursive;
 }
 
+/* text for intro*/
+.intro {
+  font-family: 'Arima', cursive;
+}
+
 /* background: #0c0207 */
 
 /* #marco {
@@ -191,4 +196,16 @@ html {
 .header {
   vertical-align: top;
   display: inline-block;
+}
+
+/* Pin for the marker */
+.pin {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.pin img {
+  width: 40px;
+  height: 40px;
 }
