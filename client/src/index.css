@@ -226,3 +226,15 @@ html {
   aspect-ratio: 1;
   display: block;
 }
+
+.edit-cat {
+  /* background: none; */
+  border: none;
+  cursor: pointer;
+}
+
+.edit-cat img {
+  align-items: center;
+  width: 30px;
+  height: 30px;
+}

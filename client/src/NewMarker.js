@@ -2,20 +2,13 @@ import React from 'react'
 import { useState, useEffect } from "react";
 
 
-function NewMarker(lng, lat, newMarker, user) {
+function NewMarker(lng, lat, user) {
     const [handleError, setHandleError] = useState()
-    const [form, setForm] = useState({
-        description: "",
-        image: "",
-        longitude: "",
-        latitude: "",
-        // cat_id: ""
-    })
-
-    useEffect(() => {
-        console.log(lat)
-        setForm({ latitude: lat, longitude: lng })
-    }, [lng, lat])
+    const [des, setDes] = useState("")
+    const [image, setImage] = useState("")
+    const [long, setLong] = useState("")
+    const [lati, setLati] = useState("")
+    const [catId, setCatId] = useState(4) // change this so that it can be a part of a drop down option
 
 
     function handleSubmit(e) {
@@ -23,33 +16,44 @@ function NewMarker(lng, lat, newMarker, user) {
         fetch("/markers", {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(form)
+            body: JSON.stringify({
+                description: des,
+                image: image,
+                longitude: long,
+                latitude: lati,
+                cat_id: catId,
+            })
         }).then(res => res.json())
             .then(data => {
                 if (data.error) {
                     setHandleError(data.error)
                 } else {
-                    newMarker(data)
                     setHandleError()
-                    setForm({
-                        description: "",
-                        image: "",
-                        longitude: "",
-                        latitude: "",
-                        // cat_id: ""
-                    })
                 }
             })
     }
 
-    function handleChange(e) {
-        console.log(e.target.name)
-        setForm({ ...form, [e.target.name]: e.target.value })
+    function handleDesChange(e) {
+        setDes(e.target.value)
+    }
+
+    function handleImgChange(e) {
+        setImage(e.target.value)
+    }
+
+    function handleLngChange(e) {
+        setLong(e.target.value)
+    }
+
+    function handleLatChange(e) {
+        setLati(e.target.value)
     }
 
     useEffect(() => {
-        setForm({ latitude: lat, longitude: lng })
+        setLong(lng.lng)
+        setLati(lng.lat)
     }, [lng, lat])
+    // console.log(form.des)
 
     return (
         <>
@@ -59,11 +63,12 @@ function NewMarker(lng, lat, newMarker, user) {
                 <form onSubmit={(e) => handleSubmit(e)}>
                     <fieldset>
                         <legend>New Sighting of a Wanderer:</legend>
-                        <label className='label-news'>Description:<input className='input' type="text" name="des" value={form.description} onChange={handleChange} /></label>
-                        <label className='label-news'>Image:<input className='input' type="text" name="image" value={form.image} onChange={handleChange} /></label>
-                        <label className='label-news'>Longitude:<input className='input' type="text" name="longitude" value={form.longitude} onChange={handleChange} /></label>
-                        <label className='label-news'>Latitude:<input className='input' type="text" name="latitude" value={form.latitude} onChange={handleChange} /></label>
+                        <label className='label-news'>Description:<input className='input' type="text" name="des" value={des} onChange={handleDesChange} /></label>
+                        <label className='label-news'>Image:<input className='input' type="text" name="image" value={image} onChange={handleImgChange} /></label>
+                        <label className='label-news'>Longitude:<input className='input' type="text" name="longitude" value={long} onChange={handleLngChange} /></label>
+                        <label className='label-news'>Latitude:<input className='input' type="text" name="latitude" value={lati} onChange={handleLatChange} /></label>
                         {/* <label className='label-news'>Cat:<input className='input' type="text" name="cat_id" value={form.cat_id} onChange={handleChange} /></label> */}
+                        <button>Submit</button>
                     </fieldset>
                 </form>
             </div>

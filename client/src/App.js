@@ -9,6 +9,7 @@ import NewMarker from "./NewMarker";
 import CatProfile from "./CatProfile";
 import CatContainer from "./CatContainer";
 import Header from "./Header";
+import NewCat from "./NewCat";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -147,8 +148,8 @@ function App() {
         {user ? (<div className="map">
 
           <ReactMapGL onClick={(e) => {
-            // console.log(e.lngLat.lng)
-            // console.log(e.lngLat.lat)
+            console.log(e.lngLat.lng)
+            console.log(e.lngLat.lat)
             setLng(e.lngLat.lng)
             setLat(e.lngLat.lat)
           }}
