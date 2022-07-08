@@ -209,3 +209,20 @@ html {
   width: 40px;
   height: 40px;
 }
+
+.cat-card {
+  padding-bottom: 15px;
+  border-radius: 15px;
+  overflow: hidden;
+  justify-content: center;
+
+}
+
+.cat-image {
+  width: 30%;
+  height: auto;
+  object-fit: cover;
+  object-position: top center;
+  aspect-ratio: 1;
+  display: block;
+}

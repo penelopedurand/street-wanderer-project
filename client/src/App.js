@@ -102,6 +102,21 @@ function App() {
     setMapData(updatedMap)
   }
 
+  const onUpdatedCat = (updatedCat) => {
+    const newUpdatedCat = (cat) => {
+      if (cat.id === updatedCat.id) {
+        return updatedCat
+      } else {
+        return cat
+      }
+    }
+    setCats(newUpdatedCat)
+  }
+
+  const filteredDeletedCat = (id) => {
+    setCats(cats.filter(cat => cat.id !== id))
+  }
+
   return (
     <div>
       <div className="App">
@@ -121,7 +136,7 @@ function App() {
           <NewMarker lng={lng} lat={lat} newMarker={newMarker} user={user} />
         </Route>
         <Route exact path="/markers/">
-          <CatContainer cats={cats} />
+          <CatContainer cats={cats} filteredDeletedCat={filteredDeletedCat} onUpdatedCat={onUpdatedCat} />
         </Route>
         <Route exact path="/markers/:id/cats">
           <CatProfile />

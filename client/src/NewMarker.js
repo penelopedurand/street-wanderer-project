@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from "react";
 
+
 function NewMarker(lng, lat, newMarker, user) {
     const [handleError, setHandleError] = useState()
     const [form, setForm] = useState({
