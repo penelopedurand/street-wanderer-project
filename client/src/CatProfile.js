@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 function CatProfile({ cat, filteredDeletedCat, onUpdatedCat }) {
     console.log(cat)
     const [name, setName] = useState(cat.name);
-    const [owner, setOwner] = useState(cat.has_owner);
+    const [owner, setOwner] = useState(cat.has_owner === true ? "Yes" : "No");
     const [feat, setfeat] = useState(cat.physical_features);
     const [fixed, setFixed] = useState(cat.fixed_status);
     const [vet, setVet] = useState(cat.vet_visit);
@@ -13,10 +13,18 @@ function CatProfile({ cat, filteredDeletedCat, onUpdatedCat }) {
     const [img, setImg] = useState(cat.image);
     const [editCat, setEditCat] = useState("");
     const [showForm, setShowForm] = useState(false);
+    const [showCat, setShowCat] = useState(false);
+
+
+    const showCatIn = () => {
+        setShowCat(!showCat);
+    }
+
 
     const showFor = () => {
         setShowForm(!showForm);
     }
+
 
     const handleDelete = () => {
         fetch(`/cats/${cat.id}`, {
@@ -72,38 +80,50 @@ function CatProfile({ cat, filteredDeletedCat, onUpdatedCat }) {
                 <p>Name of Wanderer: </p>
                 <p className="intro">{cat.name}</p>
                 <img className="cat-image" src={cat.image}></img>
-                <p>They have an owner: </p>
-                <p className="intro">{String(cat.has_owner)}</p>
-                <p>Physical Features: </p>
-                <p className="intro">{cat.physical_features}</p>
-                <p>They are fixed: </p>
-                <p className="intro">{String(cat.fixed_status)}</p>
-                <p>Last time they went to the vet?: </p>
-                <p className="intro">{cat.vet_visit}</p>
-                <p>Any vet diagnosis?: </p>
-                <p className="intro">{cat.vet_diagnosis}</p>
-                <p>Notes: </p>
-                <p className="intro">{cat.notes}</p>
+                <div>
+                    <button className="see-cat-info" onClick={showCatIn}>
+                        See more information
+                    </button>
+                    {showCat ? (<div className="see-cat">
+                        <p>They have an owner: </p>
+                        <p className="intro">{String(cat.has_owner)}</p>
+                        <p>Physical Features: </p>
+                        <p className="intro">{cat.physical_features}</p>
+                        <p>They are fixed: </p>
+                        <p className="intro">{String(cat.fixed_status)}</p>
+                        <p>Last time they went to the vet?: </p>
+                        <p className="intro">{cat.vet_visit}</p>
+                        <p>Any vet diagnosis?: </p>
+                        <p className="intro">{cat.vet_diagnosis}</p>
+                        <p>Notes: </p>
+                        <p className="intro">{cat.notes}</p>
+                    </div>
+                    ) : null}
+                </div>
+                <br></br>
                 <button className="edit-cat" onClick={showFor}>
                     <img src="./edit.jpg" /> Edit Cat
                 </button>
-                {showForm ? (<div className="update-cat">
-                    <form className="update-cat-form" onSubmit={handleUpdate}>
-                        <label>
-                            Name of Wanderer:
-                            <input class="cat-name-update" type="text" name="nameOfCat" onChange={e => setName(e.target.value)} value={name} />
-                            They have an owner:
-                            {/* <input class="cat-owner-update" type="text" name="catOwned" onChange={e => setOwner(e.target.value)} value={owner} /> */}
-                            <select className="form-control" name="team" value={owner} >
-                                <option value='Select Team Name'>{cat.has_owner ? "Yes" : "No"}</option>
-                                <option value='Select Team Name'>{!cat.has_owner ? "Yes" : "No"}</option>
-                            </select>
-                            They are fixed:
-                        </label>
-                    </form>
+                <div>
+                    {showForm ? (<div className="update-cat">
+                        <form className="update-cat-form" onSubmit={handleUpdate}>
+                            <label>
+                                Name of Wanderer:
+                                <input class="cat-name-update" type="text" name="nameOfCat" onChange={e => setName(e.target.value)} value={name} />
+                                They have an owner:
+                                {/* <input class="cat-owner-update" type="text" name="catOwned" onChange={e => setOwner(e.target.value)} value={owner} /> */}
+                                <select className="form-control" name="team" value={owner} >
+                                    <option value='Select Team Name'>{cat.has_owner ? "Yes" : "No"}</option>
+                                    <option value='Select Team Name'>{!cat.has_owner ? "Yes" : "No"}</option>
+                                </select>
+                                They are fixed:
+                            </label>
+                        </form>
+                    </div>
+                    ) : null}
                 </div>
-                ) : null}
                 <br></br>
+                <button className="delete-cat" onClick={handleDelete}>Delete Wanderer Profile</button>
             </div>
         </>
     )

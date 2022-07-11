@@ -103,6 +103,10 @@ function App() {
     setMapData(updatedMap)
   }
 
+  const handleNewCatForm = (data) => {
+    setCats([...cats, data])
+  }
+
   const onUpdatedCat = (updatedCat) => {
     const newUpdatedCat = (cat) => {
       if (cat.id === updatedCat.id) {
@@ -134,7 +138,7 @@ function App() {
           <Home />
         </Route>
         <Route exact path="/new_sighting_of_wanderer">
-          <NewMarker lng={lng} lat={lat} newMarker={newMarker} user={user} />
+          <NewMarker lng={lng} lat={lat} newMarker={newMarker} user={user} handleNewCatForm={handleNewCatForm} />
         </Route>
         <Route exact path="/markers/">
           <CatContainer cats={cats} filteredDeletedCat={filteredDeletedCat} onUpdatedCat={onUpdatedCat} />

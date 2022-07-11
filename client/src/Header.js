@@ -30,7 +30,7 @@ function Header({ user, handleLogout }) {
     return (
         <div className='header'>
             <ul className='home' onClick={handleHomeClick}>Home</ul>
-            <ul className='new-sighting' onClick={handleSightClick}>New Sighting</ul>
+            <ul className='new-sighting' onClick={handleSightClick}>New Cat / Sighting</ul>
             <ul className='cat-container' onClick={handleCatClick}>All Cats</ul>
             <ul className='cat-container' onClick={handleLoginClick}>Login</ul>
             {user ? (<button className='logout' onClick={handleLogout}>Logout</button>

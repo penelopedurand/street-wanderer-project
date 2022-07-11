@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from "react";
+import NewCat from './NewCat';
 
 
 function NewMarker(lng, lat, user) {
@@ -8,7 +9,22 @@ function NewMarker(lng, lat, user) {
     const [image, setImage] = useState("")
     const [long, setLong] = useState("")
     const [lati, setLati] = useState("")
-    const [catId, setCatId] = useState(4) // change this so that it can be a part of a drop down option
+    const [catId, setCatId] = useState() // change this so that it can be a part of a drop down option
+    const [cats, setCats] = useState([]) // fetch for cats to map for options in dropdown 
+
+    useEffect(() => {
+
+        fetch("/cats")
+            .then(resp => resp.json())
+            .then((data) => setCats(data))
+
+    }, [])
+
+    function handleCatChange(e) {
+        setCatId(e.target.value)
+    }
+
+    let catOption = cats.map((cat) => <option key={cat.id} value={cat.id}>{cat.name}</option>)
 
 
     function handleSubmit(e) {
@@ -49,16 +65,25 @@ function NewMarker(lng, lat, user) {
         setLati(e.target.value)
     }
 
+    function handleCatChange(e) {
+        setCatId(e.target.value)
+    }
+
     useEffect(() => {
         setLong(lng.lng)
         setLati(lng.lat)
     }, [lng, lat])
     // console.log(form.des)
 
+
     return (
         <>
-            <div>
-                {user ? <h3>Create a new sighting</h3> : <h3>Sign in to add a sighting</h3>}
+            <br></br>
+            <NewCat />
+            <br></br>
+            <br></br>
+            <div className='new-sight'>
+                {/* {user ? <h3>Create a new sighting</h3> : <h3>Sign in to add a sighting</h3>} */}
                 <h4>{handleError}</h4>
                 <form onSubmit={(e) => handleSubmit(e)}>
                     <fieldset>
@@ -67,7 +92,11 @@ function NewMarker(lng, lat, user) {
                         <label className='label-news'>Image:<input className='input' type="text" name="image" value={image} onChange={handleImgChange} /></label>
                         <label className='label-news'>Longitude:<input className='input' type="text" name="longitude" value={long} onChange={handleLngChange} /></label>
                         <label className='label-news'>Latitude:<input className='input' type="text" name="latitude" value={lati} onChange={handleLatChange} /></label>
-                        {/* <label className='label-news'>Cat:<input className='input' type="text" name="cat_id" value={form.cat_id} onChange={handleChange} /></label> */}
+                        <select onChange={handleCatChange}>
+                            <option value="⬇️ Select a Cat ⬇️">-- Select a Cat -- </option>
+                            {catOption}
+                        </select>
+
                         <button>Submit</button>
                     </fieldset>
                 </form>

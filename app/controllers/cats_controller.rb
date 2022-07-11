@@ -28,7 +28,7 @@ class CatsController < ApplicationController
 
     private
     def cat_params
-        params.permit(:name, :name, :has_owner, :physical_features, :fixed_status, :vet_visit, :vet_diagnosis, :notes, :image)
+        params.permit(:name, :has_owner, :physical_features, :fixed_status, :vet_visit, :vet_diagnosis, :notes, :image)
     end
     
     def find_cat
