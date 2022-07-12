@@ -8,6 +8,7 @@ import Home from "./Home";
 import NewMarker from "./NewMarker";
 import CatProfile from "./CatProfile";
 import CatContainer from "./CatContainer";
+import CatDetail from "./CatDetail";
 import Header from "./Header";
 import NewCat from "./NewCat";
 
@@ -19,8 +20,6 @@ function App() {
   const [viewport, setViewport] = useState({
     latitude: 40.646905,
     longitude: -73.958142,
-    // width: '90vw',
-    // height: '90vh',
     zoom: 10
   })
 
@@ -30,7 +29,7 @@ function App() {
   const [cats, setCats] = useState()
 
   const history = useHistory()
-  // console.log(lat)
+
   useEffect(() => {
     fetch('/me')
       .then((res) => {
@@ -47,6 +46,8 @@ function App() {
       .then(setCats);
   }, []);
   // console.log(cats)
+
+
 
   // the useeffect for the map
   useEffect(() => {
@@ -71,7 +72,6 @@ function App() {
     // console.log(selectedMark)
   }
 
-
   if (!isAuthenticated) return <Login error={'please log in'} setIsAuthenticated={setIsAuthenticated} setUser={setUser} />
 
   function handleLogout() {
@@ -82,25 +82,22 @@ function App() {
   }
 
   // delete the cat marker
-  function handleDelete() {
-    fetch(`/markers/${id}`, {
-      method: "DELETE"
-    })
-      // .then((res) => res.json())
-      .then(data => {//{console.log(data)
-        if (data.ok) {
-          // console.log(data)
-          setSelectedMark(null)
-          deleteId(id)
-        } else {
-          console.log("no")
-        }
-      })
+  function handleDelete(e, cat_id, marker_id) {
+    fetch(`/cats/${cat_id}`, {
+      method: 'DELETE',
+    }).then(res => res.json())
+      .then(json => {
+        const filteredCats = cats.filter(cat => cat.id !== cat_id)
+        const filteredMarkers = mapData.filter(marker => marker.id !== marker_id);
+        setCats(filteredCats)
+        setMapData(filteredMarkers)
+      }
+      );
+    // filteredDeletedMarker(mapData.id)
   }
 
-  function deleteId(deletedId) {
-    const updatedMap = mapData.filter(map => map.id !== deletedId)
-    setMapData(updatedMap)
+  const filteredDeletedMarker = (cat_id) => {
+    setMapData(mapData.filter(map => map.cat_id !== cat_id))
   }
 
   const handleNewCatForm = (data) => {
@@ -108,19 +105,16 @@ function App() {
   }
 
   const onUpdatedCat = (updatedCat) => {
-    const newUpdatedCat = (cat) => {
-      if (cat.id === updatedCat.id) {
-        return updatedCat
-      } else {
-        return cat
-      }
-    }
-    setCats(newUpdatedCat)
+    let mycats = cats.filter(cat => cat.id !== updatedCat.id)
+    mycats.push(updatedCat)
+    setCats(mycats)
   }
 
   const filteredDeletedCat = (id) => {
     setCats(cats.filter(cat => cat.id !== id))
   }
+
+
 
   return (
     <div>
@@ -140,11 +134,11 @@ function App() {
         <Route exact path="/new_sighting_of_wanderer">
           <NewMarker lng={lng} lat={lat} newMarker={newMarker} user={user} handleNewCatForm={handleNewCatForm} />
         </Route>
-        <Route exact path="/markers/">
-          <CatContainer cats={cats} filteredDeletedCat={filteredDeletedCat} onUpdatedCat={onUpdatedCat} />
+        <Route exact path="/cats">
+          <CatContainer cats={cats} filteredDeletedMarker={filteredDeletedMarker} filteredDeletedCat={filteredDeletedCat} onUpdatedCat={onUpdatedCat} />
         </Route>
-        <Route exact path="/markers/:id/cats">
-          <CatProfile />
+        <Route path="/cats/:id">
+          <CatDetail cats={cats} selectedMark={selectedMark} />
         </Route>
       </div>
       ) : null}
@@ -152,8 +146,6 @@ function App() {
         {user ? (<div className="map">
 
           <ReactMapGL onClick={(e) => {
-            console.log(e.lngLat.lng)
-            console.log(e.lngLat.lat)
             setLng(e.lngLat.lng)
             setLat(e.lngLat.lat)
           }}
@@ -169,15 +161,13 @@ function App() {
                 longitude={marks.longitude} latitude={marks.latitude}
               >
                 <button className="pin" onClick={e => markerButton(e, marks)}>
-                  {/* <img src="./pets-icon.jpg" style={{ width: "1%", height: "1%" }} /> */}
+
                   <img src="./pets-marker.png" />
                 </button>
               </Marker>
             ))}
             {selectedMark ? (
               <Popup
-                // latitude={40.715553207343646}
-                // longitude={-73.99283450881435}
                 latitude={selectedMark.latitude}
                 longitude={selectedMark.longitude}
                 onClose={() => setSelectedMark(null)}>
@@ -188,13 +178,10 @@ function App() {
                     <li>{selectedMark.description}</li>
                     <li>Cat Number: {selectedMark.cat_id}</li>
                   </ul>
-                  <Link to={`/markers/${id}/cats`}>
-                    <button>See More</button>
+                  <Link to={`/cats/${id}`}>
+                    See more
                   </Link>
-
-                  {user ? (
-                    <button onClick={handleDelete}>Delete</button>
-                  ) : null}
+                  <button onClick={(e) => handleDelete(e, selectedMark.cat_id, selectedMark.id)}>Delete</button>
                 </div>
               </Popup>
             ) : null}

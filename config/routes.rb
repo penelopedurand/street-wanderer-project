@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :users, only: [:index, :show, :create]
-  resources :markers, only: [:index, :show, :create, :update]
+  resources :markers
   resources :cats
   resources :sightings, only: [:index, :show, :create]
 

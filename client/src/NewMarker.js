@@ -12,6 +12,8 @@ function NewMarker(lng, lat, user) {
     const [catId, setCatId] = useState() // change this so that it can be a part of a drop down option
     const [cats, setCats] = useState([]) // fetch for cats to map for options in dropdown 
 
+
+
     useEffect(() => {
 
         fetch("/cats")
@@ -46,6 +48,11 @@ function NewMarker(lng, lat, user) {
                 } else {
                     setHandleError()
                 }
+                setDes("")
+                setImage("")
+                setLong("")
+                setLati("")
+                setCatId() //how to reset
             })
     }
 
@@ -83,13 +90,13 @@ function NewMarker(lng, lat, user) {
             <br></br>
             <br></br>
             <div className='new-sight'>
-                {/* {user ? <h3>Create a new sighting</h3> : <h3>Sign in to add a sighting</h3>} */}
+
                 <h4>{handleError}</h4>
                 <form onSubmit={(e) => handleSubmit(e)}>
                     <fieldset>
                         <legend>New Sighting of a Wanderer:</legend>
-                        <label className='label-news'>Description:<input className='input' type="text" name="des" value={des} onChange={handleDesChange} /></label>
-                        <label className='label-news'>Image:<input className='input' type="text" name="image" value={image} onChange={handleImgChange} /></label>
+                        <label className='label-news'>Description:<input className='input' type="text" placeholder='How was the interaction?' name="des" value={des} onChange={handleDesChange} /></label>
+                        <label className='label-news'>Image:<input className='input' type="text" placeholder='Add an image' name="image" value={image} onChange={handleImgChange} /></label>
                         <label className='label-news'>Longitude:<input className='input' type="text" name="longitude" value={long} onChange={handleLngChange} /></label>
                         <label className='label-news'>Latitude:<input className='input' type="text" name="latitude" value={lati} onChange={handleLatChange} /></label>
                         <select onChange={handleCatChange}>

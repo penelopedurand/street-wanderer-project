@@ -1,8 +1,8 @@
 import React from 'react'
 import { useState, useEffect } from "react";
 
-function CatProfile({ cat, filteredDeletedCat, onUpdatedCat }) {
-    console.log(cat)
+function CatProfile({ cats, cat, filteredDeletedCat, onUpdatedCat, filteredDeletedMarker }) {
+    // console.log(cats)
     const [name, setName] = useState(cat.name);
     const [owner, setOwner] = useState(cat.has_owner === true ? "Yes" : "No");
     const [feat, setfeat] = useState(cat.physical_features);
@@ -11,6 +11,7 @@ function CatProfile({ cat, filteredDeletedCat, onUpdatedCat }) {
     const [dia, setDia] = useState(cat.vet_diagnosis);
     const [notes, setNotes] = useState(cat.notes);
     const [img, setImg] = useState(cat.image);
+    const [catId, setCatId] = useState(cat.cat_id);
     const [editCat, setEditCat] = useState("");
     const [showForm, setShowForm] = useState(false);
     const [showCat, setShowCat] = useState(false);
@@ -20,11 +21,9 @@ function CatProfile({ cat, filteredDeletedCat, onUpdatedCat }) {
         setShowCat(!showCat);
     }
 
-
     const showFor = () => {
         setShowForm(!showForm);
     }
-
 
     const handleDelete = () => {
         fetch(`/cats/${cat.id}`, {
@@ -32,27 +31,22 @@ function CatProfile({ cat, filteredDeletedCat, onUpdatedCat }) {
         }).then(res => res.json())
             .then(json => console.log(json));
         filteredDeletedCat(cat.id)
+        filteredDeletedMarker(cat.id)
     }
 
     const handleUpdate = (e) => {
         e.preventDefault();
-        const updatedCat = {
-            name: cat.name,
-            has_owner: cat.has_owner,
-            physical_features: cat.physical_features,
-            fixed_status: cat.fixed_status,
-            vet_visit: cat.vet_visit,
-            vet_diagnosis: cat.vet_diagnosis,
-            notes: cat.notes,
-            image: cat.image,
-
-        }
         fetch(`/cats/${cat.id}`, {
             method: 'PATCH',
             headers: { 'Content-type': 'application/json' },
-            body: JSON.stringify(
-                updatedCat
-            )
+            body: JSON.stringify({
+                name: name,
+                has_owner: owner,
+                fixed_status: fixed,
+                vet_visit: vet,
+                vet_diagnosis: dia,
+                cat_id: cat.cat_id
+            })
         }).then(resp => resp.json())
             .then(updatedCat => {
                 setEditCat(updatedCat);
@@ -61,22 +55,10 @@ function CatProfile({ cat, filteredDeletedCat, onUpdatedCat }) {
 
     }
 
-    // function handleForm(e) {
-    //     let value = ''
-    //     if (e.target.value === 'Yes' === true) {
-    //         value = cat.has_owner
-    //         setOwner(e.target.value)
-    //         console.log(value)
-    //     }
-    //     else { setSelectedTeamName(e.target.value) }
-    //     handleChangeTeam(e)
-    // }
-
     return (
         <>
             <div className="cat-card" >
                 <br></br>
-                {/* <h3>Name of Region:</h3> */}
                 <p>Name of Wanderer: </p>
                 <p className="intro">{cat.name}</p>
                 <img className="cat-image" src={cat.image}></img>
@@ -111,13 +93,35 @@ function CatProfile({ cat, filteredDeletedCat, onUpdatedCat }) {
                                 Name of Wanderer:
                                 <input class="cat-name-update" type="text" name="nameOfCat" onChange={e => setName(e.target.value)} value={name} />
                                 They have an owner:
-                                {/* <input class="cat-owner-update" type="text" name="catOwned" onChange={e => setOwner(e.target.value)} value={owner} /> */}
-                                <select className="form-control" name="team" value={owner} >
-                                    <option value='Select Team Name'>{cat.has_owner ? "Yes" : "No"}</option>
-                                    <option value='Select Team Name'>{!cat.has_owner ? "Yes" : "No"}</option>
+                                <select className="form-control" name="owner" value={owner} onChange={e => setOwner(e.target.value)}>
+                                    <option value="⬇️ Select a Response ⬇️"> --Do they have an owner?-- </option>
+                                    <option value="False"> False </option>
+                                    <option value="True"> True </option>
                                 </select>
                                 They are fixed:
+                                <select className="form-control" name="owner" value={fixed} onChange={e => setFixed(e.target.value)}>
+                                    <option value="⬇️ Select a Response ⬇️"> --Are they fixed?-- </option>
+                                    <option value="False"> False </option>
+                                    <option value="True"> True </option>
+                                </select>
+                                Last Vet Visit:
+                                <input
+                                    className="vet-visit"
+                                    type="text"
+                                    placeholder='Last vet visit date'
+                                    value={vet}
+                                    onChange={e => setVet(e.target.value)}>
+                                </input>
                             </label>
+                            Vet Diagnosis:
+                            <input
+                                className="vet-dia"
+                                type="text"
+                                placeholder='Any diagnosis?'
+                                value={dia}
+                                onChange={e => setDia(e.target.value)}>
+                            </input>
+                            <button type="submit" className="btn-submit">Submit Update</button>
                         </form>
                     </div>
                     ) : null}

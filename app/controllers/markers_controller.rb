@@ -20,6 +20,12 @@ class MarkersController < ApplicationController
         render json: marker, status: :created
     end
 
+    def destroy
+        marker = find_marker
+        marker.destroy!
+        head :no_content, status: :ok
+    end
+
     private
     def marker_params
         params.permit(:description, :image, :longitude, :latitude, :cat_id)

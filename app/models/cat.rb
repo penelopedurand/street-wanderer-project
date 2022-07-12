@@ -1,5 +1,5 @@
 class Cat < ApplicationRecord
-    has_one :marker
+    has_many :markers, dependent: :destroy
     has_many :sightings
     has_many :users, through: :sightings
 

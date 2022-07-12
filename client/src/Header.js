@@ -18,7 +18,7 @@ function Header({ user, handleLogout }) {
 
     function handleCatClick(e) {
         e.preventDefault()
-        history.push("/markers")
+        history.push("/cats")
     }
 
     function handleLoginClick(e) {
