@@ -1,8 +1,6 @@
 import React from 'react';
 import { useHistory, useState, useEffect } from "react";
 
-
-
 function Home() {
 
 

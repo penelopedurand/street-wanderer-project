@@ -3,7 +3,8 @@ import { useState, useEffect } from "react";
 import NewCat from './NewCat';
 
 
-function NewMarker(lng, lat, user) {
+function NewMarker(props) {
+    const { lng, lat, user } = props;
     const [handleError, setHandleError] = useState()
     const [des, setDes] = useState("")
     const [image, setImage] = useState("")
@@ -12,7 +13,7 @@ function NewMarker(lng, lat, user) {
     const [catId, setCatId] = useState() // change this so that it can be a part of a drop down option
     const [cats, setCats] = useState([]) // fetch for cats to map for options in dropdown 
 
-
+    console.log(user.id)
 
     useEffect(() => {
 
@@ -40,6 +41,7 @@ function NewMarker(lng, lat, user) {
                 longitude: long,
                 latitude: lati,
                 cat_id: catId,
+                user_id: user.id
             })
         }).then(res => res.json())
             .then(data => {
@@ -77,8 +79,8 @@ function NewMarker(lng, lat, user) {
     }
 
     useEffect(() => {
-        setLong(lng.lng)
-        setLati(lng.lat)
+        setLong(lng)
+        setLati(lat)
     }, [lng, lat])
     // console.log(form.des)
 

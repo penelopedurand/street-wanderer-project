@@ -28,7 +28,7 @@ class MarkersController < ApplicationController
 
     private
     def marker_params
-        params.permit(:description, :image, :longitude, :latitude, :cat_id)
+        params.permit(:description, :image, :longitude, :latitude, :cat_id, :user_id)
     end
 
     def find_marker

@@ -14,7 +14,7 @@ import NewCat from "./NewCat";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState({})
   const [lng, setLng] = useState()
   const [lat, setLat] = useState()
   const [viewport, setViewport] = useState({
@@ -126,22 +126,22 @@ function App() {
       <Route exact path="/signup">
         <Signup />
       </Route>
-      {user ? (<div>
-        <Header user={user} handleLogout={handleLogout} />
-        <Route exact path="/home">
-          <Home />
-        </Route>
-        <Route exact path="/new_sighting_of_wanderer">
-          <NewMarker lng={lng} lat={lat} newMarker={newMarker} user={user} handleNewCatForm={handleNewCatForm} />
-        </Route>
-        <Route exact path="/cats">
-          <CatContainer cats={cats} filteredDeletedMarker={filteredDeletedMarker} filteredDeletedCat={filteredDeletedCat} onUpdatedCat={onUpdatedCat} />
-        </Route>
-        <Route path="/cats/:id">
-          <CatDetail cats={cats} selectedMark={selectedMark} />
-        </Route>
-      </div>
-      ) : null}
+      {/* {user ? (<div> */}
+      <Header user={user} handleLogout={handleLogout} />
+      <Route exact path="/home">
+        <Home />
+      </Route>
+      <Route exact path="/new_sighting_of_wanderer">
+        <NewMarker lng={lng} lat={lat} newMarker={newMarker} user={user} handleNewCatForm={handleNewCatForm} />
+      </Route>
+      <Route exact path="/cats">
+        <CatContainer cats={cats} filteredDeletedMarker={filteredDeletedMarker} filteredDeletedCat={filteredDeletedCat} onUpdatedCat={onUpdatedCat} />
+      </Route>
+      <Route path="/cats/:id">
+        <CatDetail cats={cats} selectedMark={selectedMark} />
+      </Route>
+      {/* </div> */}
+      {/* // ) : null} */}
       <div>
         {user ? (<div className="map">
 
@@ -179,7 +179,7 @@ function App() {
                     <li>Cat Number: {selectedMark.cat_id}</li>
                   </ul>
                   <Link to={`/cats/${id}`}>
-                    See more
+                    <button> See more </button>
                   </Link>
                   <button onClick={(e) => handleDelete(e, selectedMark.cat_id, selectedMark.id)}>Delete</button>
                 </div>
