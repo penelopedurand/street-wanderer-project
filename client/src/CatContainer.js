@@ -1,5 +1,6 @@
 import React from 'react'
 import CatProfile from './CatProfile';
+import { Card } from "semantic-ui-react";
 
 function CatContainer({ cats, filteredDeletedCat, onUpdatedCat, filteredDeletedMarker }) {
 
@@ -10,8 +11,10 @@ function CatContainer({ cats, filteredDeletedCat, onUpdatedCat, filteredDeletedM
 
     return (
         <>
-            <h1>List of Street Wanderers</h1>
-            {catList}
+            <Card.Group itemsPerRow={5} cats={cats}>
+                <h1>List of Street Wanderers</h1>
+                {catList}
+            </Card.Group>
         </>
     )
 }

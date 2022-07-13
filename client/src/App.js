@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useHistory, Route, Link, ReactRouter } from "react-router-dom";
+import { useHistory, Route, Link } from "react-router-dom";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
 import 'mapbox-gl/dist/mapbox-gl.css';
 import Login from "./Login";
@@ -126,22 +126,22 @@ function App() {
       <Route exact path="/signup">
         <Signup />
       </Route>
-      {/* {user ? (<div> */}
-      <Header user={user} handleLogout={handleLogout} />
-      <Route exact path="/home">
-        <Home />
-      </Route>
-      <Route exact path="/new_sighting_of_wanderer">
-        <NewMarker lng={lng} lat={lat} newMarker={newMarker} user={user} handleNewCatForm={handleNewCatForm} />
-      </Route>
-      <Route exact path="/cats">
-        <CatContainer cats={cats} filteredDeletedMarker={filteredDeletedMarker} filteredDeletedCat={filteredDeletedCat} onUpdatedCat={onUpdatedCat} />
-      </Route>
-      <Route path="/cats/:id">
-        <CatDetail cats={cats} selectedMark={selectedMark} />
-      </Route>
-      {/* </div> */}
-      {/* // ) : null} */}
+      {user ? (<div>
+        <Header user={user} handleLogout={handleLogout} />
+        <Route exact path="/home">
+          <Home />
+        </Route>
+        <Route exact path="/new_sighting_of_wanderer">
+          <NewMarker lng={lng} lat={lat} newMarker={newMarker} user={user} handleNewCatForm={handleNewCatForm} />
+        </Route>
+        <Route exact path="/cats">
+          <CatContainer cats={cats} filteredDeletedMarker={filteredDeletedMarker} filteredDeletedCat={filteredDeletedCat} onUpdatedCat={onUpdatedCat} />
+        </Route>
+        <Route path="/cats/:id">
+          <CatDetail cats={cats} selectedMark={selectedMark} />
+        </Route>
+      </div>
+      ) : null}
       <div>
         {user ? (<div className="map">
 
@@ -170,7 +170,8 @@ function App() {
               <Popup
                 latitude={selectedMark.latitude}
                 longitude={selectedMark.longitude}
-                onClose={() => setSelectedMark(null)}>
+              // onClose={() => setSelectedMark(null)}// <---- what makes my app break but what also allows popup
+              >
 
                 <div style={{ width: "auto", height: "auto" }}>
                   <img style={{ height: "150px", width: "auto", marginTop: "5px" }} src={selectedMark.image}></img>

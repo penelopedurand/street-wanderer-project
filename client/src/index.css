@@ -189,7 +189,7 @@ html {
   text-align: center;
   display: block;
   flex-direction: column;
-  margin-top: -20em;
+  margin-top: -23em;
   overflow-x: hidden;
 }
 
@@ -210,13 +210,14 @@ html {
   height: 40px;
 }
 
+/* 
 .cat-card {
   padding-bottom: 15px;
   border-radius: 15px;
   overflow: hidden;
   justify-content: center;
 
-}
+} */
 
 .cat-image {
   width: 30%;
@@ -237,4 +238,18 @@ html {
   align-items: center;
   width: 30px;
   height: 30px;
+}
+
+/*Navba / header */
+.navbar a {
+  margin-top: 0.5%;
+  text-decoration: none;
+  color: #3f484b;
+  background-color: #cad8e5;
+  padding: 4px;
+  border-radius: 7px;
+  margin-left: 11%;
+  margin-right: 3%;
+  border: 0.9px solid;
+  border-color: #3f484b;
 }
