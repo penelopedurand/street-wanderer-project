@@ -53,6 +53,7 @@ function CatProfile({ cats, cat, filteredDeletedCat, onUpdatedCat, filteredDelet
             .then(updatedCat => {
                 setEditCat(updatedCat);
                 onUpdatedCat(updatedCat);
+                setShowForm(!showForm)
             });
 
     }
@@ -101,10 +102,10 @@ function CatProfile({ cats, cat, filteredDeletedCat, onUpdatedCat, filteredDelet
                         <form className="update-cat-form" onSubmit={handleUpdate}>
                             <label>
                                 Name of Wanderer:
-                                <input class="cat-name-update" type="text" name="nameOfCat" onChange={e => setName(e.target.value)} value={name} />
+                                <input className="input" type="text" name="nameOfCat" onChange={e => setName(e.target.value)} value={name} />
                                 <br></br>
                                 They have an owner:
-                                <select className="form-control" name="owner" value={owner} onChange={e => setOwner(e.target.value)}>
+                                <select className="input" name="owner" value={owner} onChange={e => setOwner(e.target.value)}>
                                     <option value="⬇️ Select a Response ⬇️"> --Do they have an owner?-- </option>
                                     <option value="False"> False </option>
                                     <option value="True"> True </option>
@@ -112,7 +113,7 @@ function CatProfile({ cats, cat, filteredDeletedCat, onUpdatedCat, filteredDelet
                                 <br></br>
                                 They are fixed:
                                 <br></br>
-                                <select className="form-control" name="owner" value={fixed} onChange={e => setFixed(e.target.value)}>
+                                <select className="input" name="owner" value={fixed} onChange={e => setFixed(e.target.value)}>
                                     <option value="⬇️ Select a Response ⬇️"> --Are they fixed?-- </option>
                                     <option value="False"> False </option>
                                     <option value="True"> True </option>
@@ -121,7 +122,7 @@ function CatProfile({ cats, cat, filteredDeletedCat, onUpdatedCat, filteredDelet
                                 Last Vet Visit:
                                 <br></br>
                                 <input
-                                    className="vet-visit"
+                                    className="input"
                                     type="text"
                                     placeholder='Last vet visit date'
                                     value={vet}
@@ -132,14 +133,14 @@ function CatProfile({ cats, cat, filteredDeletedCat, onUpdatedCat, filteredDelet
                             Vet Diagnosis:
                             <br></br>
                             <input
-                                className="vet-dia"
+                                className="input"
                                 type="text"
                                 placeholder='Any diagnosis?'
                                 value={dia}
                                 onChange={e => setDia(e.target.value)}>
                             </input>
                             <br></br>
-                            <button type="submit" className="btn-submit">Submit Update</button>
+                            <button type="submit" className="btn-submit">✅ Submit Update ✅</button>
                         </form>
                         <br></br>
                     </div>

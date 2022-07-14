@@ -32,6 +32,17 @@ function App() {
 
   const history = useHistory()
 
+  const popupStyle = {
+    backgroundColor: "#f9c5d1",
+    backgroundImage: "linear-gradient(315deg, #f9c5d1 0%, #9795ef 74%)",
+    borderRadius: 10,
+    border: "1px solid #221c43",
+    padding: 8,
+    paddingTop: 0,
+    width: "auto",
+    height: "auto"
+  }
+
   useEffect(() => {
     fetch('/me')
       .then((res) => {
@@ -191,8 +202,8 @@ function App() {
 
                   >
 
-                    <div style={{ width: "auto", height: "auto" }}>
-                      <img style={{ height: "150px", width: "95%", marginTop: "5px" }} src={selectedMark.image}></img>
+                    <div style={popupStyle}>
+                      <img style={{ height: "150px", width: "100%", marginTop: "5px" }} src={selectedMark.image}></img>
                       <ul>
                         <li>Name: {selectedMark.cat.name}</li>
                         <li>Interaction: {selectedMark.description}</li>

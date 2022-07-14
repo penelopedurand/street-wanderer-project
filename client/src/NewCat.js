@@ -52,10 +52,11 @@ function NewCat(handleNewCatForm) {
                 <form onSubmit={(e) => handleSubmit(e)}>
                     <fieldset>
                         <legend>New Wanderer:</legend>
-                        <label className='label-new-cat'>Name:<input className='input' type="text" placeholder="Create a name" value={name} onChange={e => setName(e.target.value)} /></label>
-                        <label>
-                            Has Owner:
-                            <select className="owner"
+                        <label className='label-new-cat'>Name:<br></br>
+                            <input className='input' type="text" placeholder="Create a name" value={name} onChange={e => setName(e.target.value)} /></label>
+                        <label className='label-new-cat'>
+                            Has Owner:<br></br>
+                            <select className="input"
                                 type="text"
                                 placeholder='Does the cat have an owner? True = yes and false = no'
                                 value={owner}
@@ -65,21 +66,20 @@ function NewCat(handleNewCatForm) {
                                 <option value="True"> True </option>
                             </select>
                         </label>
-                        <label>
-                            Physical Features:
+                        <label className='label-new-cat'>
+                            Physical Features:<br></br>
                             <input
-                                className="physical-fea"
+                                className="input"
                                 type="text"
                                 placeholder='How do they look?'
                                 value={feat}
-                                onChange={e => setFeat(e.target.value)}>
-                            </input>
+                                onChange={e => setFeat(e.target.value)} />
                         </label>
                         <br></br>
                         <br></br>
-                        <label>
-                            Fixed Status:
-                            <select className="fixed"
+                        <label className='label-new-cat'>
+                            Fixed Status:<br></br>
+                            <select className="input"
                                 type="text"
                                 placeholder='Are they fixed?'
                                 value={fixed}
@@ -89,48 +89,47 @@ function NewCat(handleNewCatForm) {
                                 <option value="True"> True </option>
                             </select>
                         </label>
-                        <label>
-                            Vet Visit:
+                        <label className='label-new-cat'>
+                            Vet Visit:<br></br>
                             <input
-                                className="vet-visit"
+                                className="input"
                                 type="text"
                                 placeholder='Last vet visit date'
                                 value={vet}
-                                onChange={e => setVet(e.target.value)}>
-                            </input>
+                                onChange={e => setVet(e.target.value)} />
                         </label>
-                        <label>
-                            Vet Diagnosis:
+                        <label className='label-new-cat'>
+                            Vet Diagnosis:<br></br>
                             <input
-                                className="vet-dia"
+                                className="input"
                                 type="text"
                                 placeholder='Any diagnosis?'
                                 value={dia}
-                                onChange={e => setDia(e.target.value)}>
-                            </input>
+                                onChange={e => setDia(e.target.value)} />
                         </label>
-                        <label>
-                            Notes:
+                        <label className='label-new-cat'>
+                            Notes:<br></br>
                             <input
-                                className="notes"
+                                className="input"
                                 type="text"
                                 placeholder='Anything else?'
                                 value={notes}
                                 onChange={e => setNotes(e.target.value)}>
                             </input>
                         </label>
-                        <label>
-                            Image:
+                        <label className='label-new-cat'>
+                            Image:<br></br>
                             <input
-                                className="img"
+                                className="input"
                                 type="text"
                                 placeholder='Portrait'
                                 value={img}
                                 onChange={e => setImg(e.target.value)}>
                             </input>
-                        </label>
-                        <button>Submit</button>
+                        </label><br></br>
+                        <button>✔️ Submit ✔️</button>
                     </fieldset>
+
                 </form>
             </div>
         </>

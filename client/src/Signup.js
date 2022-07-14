@@ -50,8 +50,7 @@ function Signup({ setUser }) {
                     <form onSubmit={handleSubmit} className="signup-form">
                         <h2> 🌇 🐈 Welcome  to  The  Streets! 🐈‍⬛ 🏙 </h2>
                         <button onClick={handleBack} className="login-page-button"> Already a user? Log in here </button>
-                        <h4 className="signup-text">Not Signed Up with The Streets? </h4>
-                        <h4>Sign up below!</h4>
+                        <h4 className="signup-text">New user? Sign up below!</h4>
                         <label>Username:
                             <input type="text" id="username" placeholder="enter username here" value={username}
                                 onChange={e => setUsername(e.target.value)} />

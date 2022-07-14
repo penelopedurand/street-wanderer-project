@@ -83,7 +83,7 @@ function NewMarker(props) {
         setLong(lng)
         setLati(lat)
     }, [lng, lat])
-    // console.log(form.des)
+    console.log(handleError)
 
 
     return (
@@ -93,25 +93,29 @@ function NewMarker(props) {
             <br></br>
             <br></br>
             <div className='new-sight'>
-
-                <h4>{handleError}</h4>
                 <form onSubmit={(e) => handleSubmit(e)}>
                     <fieldset>
                         <legend>New Sighting of a Wanderer:</legend>
-                        <label className='label-news'>Description:<input className='input' type="text" placeholder='How was the interaction?' name="des" value={des} onChange={handleDesChange} /></label>
-                        <label className='label-news'>Image:<input className='input' type="text" placeholder='Add an image' name="image" value={image} onChange={handleImgChange} /></label>
-                        <label className='label-news'>Longitude:<input className='input' type="text" name="longitude" value={long} onChange={handleLngChange} /></label>
-                        <label className='label-news'>Latitude:<input className='input' type="text" name="latitude" value={lati} onChange={handleLatChange} /></label>
-                        <label className='label-news'>Wanderer Name: </label>
-                        <select onChange={handleCatChange}>
+                        <label className='label-news'>Description:<br></br>
+                            <input className='input' type="text" placeholder='Describe interaction' name="des" value={des} onChange={handleDesChange} /></label>
+                        <label className='label-news'>Image:<br></br>
+                            <input className='input' type="text" placeholder='Add an image' name="image" value={image} onChange={handleImgChange} /></label>
+                        <label className='label-news'>Longitude:<br></br>
+                            <input className='input' type="text" name="longitude" placeholder='Longitude' value={long} onChange={handleLngChange} /></label>
+                        <label className='label-news'>Latitude:<br></br>
+                            <input className='input' type="text" name="latitude" placeholder='Latitude' value={lati} onChange={handleLatChange} /></label>
+                        <label className='label-news'>Wanderer Name:</label>
+                        <br></br>
+                        <select onChange={handleCatChange} className='input'>
                             <option value="⬇️ Select a Cat ⬇️">-- Select a Cat -- </option>
                             {catOption}
                         </select>
-
-                        <button>Submit</button>
+                        <br></br>
+                        <button>✔️ Submit ✔️</button>
                     </fieldset>
                 </form>
             </div>
+            <h4>{handleError}</h4>
 
         </>
     )
