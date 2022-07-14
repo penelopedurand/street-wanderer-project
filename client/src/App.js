@@ -184,7 +184,6 @@ function App() {
                     longitude={marks.longitude} latitude={marks.latitude}
                   >
                     <button className="pin" onClick={e => markerButton(e, marks)}>
-
                       <img src="./pets-marker.png" />
                     </button>
                   </Marker>
@@ -194,19 +193,16 @@ function App() {
                     latitude={selectedMark.latitude}
                     longitude={selectedMark.longitude}
                     onClose={handleClose}
-                  // <-- this one works until you click on see more
-                  // onClose={() => setSelectedMark(null)}
-                  // <---- what makes my app break but what also allows popup
-                  // onClose={() => window.location.reload(true)}
-                  //<--- refreshes entire page
-
                   >
 
                     <div style={popupStyle}>
                       <img style={{ height: "150px", width: "100%", marginTop: "5px" }} src={selectedMark.image}></img>
                       <ul>
-                        <li>Name: {selectedMark.cat.name}</li>
-                        <li>Interaction: {selectedMark.description}</li>
+                        <li>
+                          <span className="bold">Name: </span>{selectedMark.cat.name}</li>
+                        <span></span>
+                        <li>
+                          <span className="bold">Interaction: </span>{selectedMark.description}</li>
                       </ul>
                       <Link to={`/cats/${id}`}>
                         <button onClick={() => { window.scrollTo({ top: 90, left: 0, behavior: 'smooth' }) }}> See more </button>
