@@ -220,12 +220,15 @@ html {
 } */
 
 .cat-image {
-  width: 30%;
+  width: 50%;
   height: auto;
   object-fit: cover;
   object-position: top center;
   aspect-ratio: 1;
   display: block;
+  border-radius: 7px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .edit-cat {
@@ -248,8 +251,55 @@ html {
   background-color: #cad8e5;
   padding: 4px;
   border-radius: 7px;
-  margin-left: 11%;
+  margin-left: 15%;
   margin-right: 3%;
   border: 0.9px solid;
   border-color: #3f484b;
+}
+
+.cat-grid-container {
+  display: grid;
+  grid-row: repeat(2, 1fr);
+  column-gap: 50px;
+  row-gap: 20px;
+  padding: 10px;
+  margin: auto;
+  justify-content: center;
+  gap: 1rem;
+  /* grid-auto-flow: column; */
+}
+
+/*Blocks for cat individually */
+.cat-grid-item {
+  background: rgba(175, 191, 233, 0.6);
+  border: 3px solid #221c43;
+  padding: 8px;
+  padding-top: 0px;
+  font-size: 20px;
+  text-align: center;
+  width: 300px;
+  height: auto;
+  /* margin: auto; */
+  border-radius: 10px;
+}
+
+.card-container {
+  text-align: center;
+}
+
+/*signup  */
+.signup-form {
+  text-align: center;
+  display: block;
+  flex-direction: column;
+  margin-top: -26.5em;
+  overflow-x: hidden;
+}
+
+.login-redirect {
+  text-align: center;
+  display: block;
+  flex-direction: column;
+  margin-top: -23em;
+  overflow-x: hidden;
 }

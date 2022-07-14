@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import { useHistory, Route, Link } from "react-router-dom";
+import { BrowserRouter, Switch, useHistory, Route, Link } from "react-router-dom";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
 import 'mapbox-gl/dist/mapbox-gl.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from "./Login";
 import Signup from "./Signup";
 import Home from "./Home";
@@ -27,6 +28,7 @@ function App() {
   const [selectedMark, setSelectedMark] = useState(null)
   const [id, setId] = useState()
   const [cats, setCats] = useState()
+  const [showDetailsPage, setShowDetailsPage] = useState(false)
 
   const history = useHistory()
 
@@ -114,83 +116,103 @@ function App() {
     setCats(cats.filter(cat => cat.id !== id))
   }
 
-
+  function handleClose(e) {
+    setSelectedMark(null)
+  }
+  // console.log(selectedMark)
 
   return (
-    <div>
-      <div className="App">
-        <Route exact path="/">
-          <Login setUser={setUser} setIsAuthenticated={setIsAuthenticated} />
-        </Route>
-      </div>
-      <Route exact path="/signup">
-        <Signup />
-      </Route>
-      {user ? (<div>
-        <Header user={user} handleLogout={handleLogout} />
-        <Route exact path="/home">
-          <Home />
-        </Route>
-        <Route exact path="/new_sighting_of_wanderer">
-          <NewMarker lng={lng} lat={lat} newMarker={newMarker} user={user} handleNewCatForm={handleNewCatForm} />
-        </Route>
-        <Route exact path="/cats">
-          <CatContainer cats={cats} filteredDeletedMarker={filteredDeletedMarker} filteredDeletedCat={filteredDeletedCat} onUpdatedCat={onUpdatedCat} />
-        </Route>
-        <Route path="/cats/:id">
-          <CatDetail cats={cats} selectedMark={selectedMark} />
-        </Route>
-      </div>
-      ) : null}
+    <>
       <div>
-        {user ? (<div className="map">
+        {/* < BrowserRouter> */}
+        <div className="App">
+          {user ? (<div>
+            <Header user={user} handleLogout={handleLogout} />
+            <Route exact path="/home">
+              <Home />
+            </Route>
+            <Route exact path="/new_sighting_of_wanderer">
+              <NewMarker lng={lng} lat={lat} newMarker={newMarker} user={user} handleNewCatForm={handleNewCatForm} />
+            </Route>
+            <Route exact path="/cats">
+              <CatContainer cats={cats} filteredDeletedMarker={filteredDeletedMarker} filteredDeletedCat={filteredDeletedCat} onUpdatedCat={onUpdatedCat} />
+            </Route>
+            <Route path="/cats/:id">
+              <CatDetail cats={cats} selectedMark={selectedMark} />
+            </Route>
+          </div>
+          ) : null}
 
-          <ReactMapGL onClick={(e) => {
-            setLng(e.lngLat.lng)
-            setLat(e.lngLat.lat)
-          }}
-            {...viewport}
-            mapboxAccessToken="pk.eyJ1IjoibGFyYWluYm93bGxhbWEiLCJhIjoiY2w1OGNkbzI2MXl1NTNkbWVyNXJjdzJ2bCJ9.7N9MTnvtXDVgy6HQJByhEA"
-            mapStyle="mapbox://styles/larainbowllama/cl589z875000215ubfg7ul7bm"
-            style={{ width: 1000, height: 300 }}
-            onMove={evt => setViewport(evt.viewState)}
-          >
-            {mapData.map(marks => (
-              <Marker
-                key={marks.id}
-                longitude={marks.longitude} latitude={marks.latitude}
+          <Route exact path="/">
+            <Login setUser={setUser} setIsAuthenticated={setIsAuthenticated} />
+          </Route>
+
+          <Route exact path="/signup">
+            <Signup />
+          </Route>
+
+          <div>
+            {user ? (<div className="map">
+              <ReactMapGL onClick={(e) => {
+                setLng(e.lngLat.lng)
+                setLat(e.lngLat.lat)
+              }}
+                {...viewport}
+                mapboxAccessToken="pk.eyJ1IjoibGFyYWluYm93bGxhbWEiLCJhIjoiY2w1OGNkbzI2MXl1NTNkbWVyNXJjdzJ2bCJ9.7N9MTnvtXDVgy6HQJByhEA"
+                mapStyle="mapbox://styles/larainbowllama/cl589z875000215ubfg7ul7bm"
+                style={{
+                  width: 1078, height: 480
+                }}
+                onMove={evt => setViewport(evt.viewState)}
               >
-                <button className="pin" onClick={e => markerButton(e, marks)}>
+                {mapData.map(marks => (
+                  <Marker
+                    key={marks.id}
+                    longitude={marks.longitude} latitude={marks.latitude}
+                  >
+                    <button className="pin" onClick={e => markerButton(e, marks)}>
 
-                  <img src="./pets-marker.png" />
-                </button>
-              </Marker>
-            ))}
-            {selectedMark ? (
-              <Popup
-                latitude={selectedMark.latitude}
-                longitude={selectedMark.longitude}
-              // onClose={() => setSelectedMark(null)}// <---- what makes my app break but what also allows popup
-              >
+                      <img src="./pets-marker.png" />
+                    </button>
+                  </Marker>
+                ))}
+                {selectedMark ? (
+                  <Popup
+                    latitude={selectedMark.latitude}
+                    longitude={selectedMark.longitude}
+                    onClose={handleClose}
+                  // <-- this one works until you click on see more
+                  // onClose={() => setSelectedMark(null)}
+                  // <---- what makes my app break but what also allows popup
+                  // onClose={() => window.location.reload(true)}
+                  //<--- refreshes entire page
 
-                <div style={{ width: "auto", height: "auto" }}>
-                  <img style={{ height: "150px", width: "auto", marginTop: "5px" }} src={selectedMark.image}></img>
-                  <ul>
-                    <li>{selectedMark.description}</li>
-                    <li>Cat Number: {selectedMark.cat_id}</li>
-                  </ul>
-                  <Link to={`/cats/${id}`}>
-                    <button> See more </button>
-                  </Link>
-                  <button onClick={(e) => handleDelete(e, selectedMark.cat_id, selectedMark.id)}>Delete</button>
-                </div>
-              </Popup>
-            ) : null}
-          </ReactMapGL>
+                  >
+
+                    <div style={{ width: "auto", height: "auto" }}>
+                      <img style={{ height: "150px", width: "95%", marginTop: "5px" }} src={selectedMark.image}></img>
+                      <ul>
+                        <li>Name: {selectedMark.cat.name}</li>
+                        <li>Interaction: {selectedMark.description}</li>
+                      </ul>
+                      <Link to={`/cats/${id}`}>
+                        <button onClick={() => { window.scrollTo({ top: 90, left: 0, behavior: 'smooth' }) }}> See more </button>
+                      </Link>
+                      <button onClick={(e) => handleDelete(e, selectedMark.cat_id, selectedMark.id)}>Delete</button>
+                    </div>
+                  </Popup>
+                ) : null}
+              </ReactMapGL>
+            </div>
+            ) : <div></div>}
+          </div>
+
         </div>
-        ) : <div></div>}
-      </div>
-    </div >
+        {/* </BrowserRouter> */}
+
+      </div >
+
+    </>
   );
 }
 

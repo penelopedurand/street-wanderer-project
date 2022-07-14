@@ -38,32 +38,43 @@ function Signup({ setUser }) {
 
 
     return (
-        <div>
-            <h3> 🌇 🐈 Welcome to The Streets! 🐈‍⬛ 🏙 </h3>
-            <button onClick={handleBack} className="login-page-button"> Already a user? Log in here </button>
-            <h1 className="signup-text">Not Signed Up with The Streets? Sign up here!</h1>
-            <form onSubmit={handleSubmit}>
-                <label>Username:
-                    <input type="text" id="username" placeholder="enter username here" value={username}
-                        onChange={e => setUsername(e.target.value)} />
-                </label>
-                <label>Password
-                    <input type="password" id="password"
-                        placeholder="enter password here"
-                        value={password}
-                        onChange={e => setPassword(e.target.value)} />
-                </label>
-                <label>Confirm Password
-                    <input type="password-confirm"
-                        id="password_confirmation"
-                        placeholder="enter password again"
-                        value={password_confirmation}
-                        onChange={e => setPasswordConfirmation(e.target.value)} />
-                </label>
-                <button type="submit" >Submit</button>
-            </form>
-            {error ? <div>{error}</div> : null}
-        </div>
+        <>
+            <div className='cat-background'>
+                <span id="cielo"></span>
+                <span id="luna"></span>
+                <div id="gato"></div>
+                <span id="muro"></span>
+                <span id="edificios"></span>
+                <div className='signup'>
+                    <br></br>
+                    <form onSubmit={handleSubmit} className="signup-form">
+                        <h2> 🌇 🐈 Welcome  to  The  Streets! 🐈‍⬛ 🏙 </h2>
+                        <button onClick={handleBack} className="login-page-button"> Already a user? Log in here </button>
+                        <h4 className="signup-text">Not Signed Up with The Streets? </h4>
+                        <h4>Sign up below!</h4>
+                        <label>Username:
+                            <input type="text" id="username" placeholder="enter username here" value={username}
+                                onChange={e => setUsername(e.target.value)} />
+                        </label>
+                        <label>Password:
+                            <input type="password" id="password"
+                                placeholder="enter password here"
+                                value={password}
+                                onChange={e => setPassword(e.target.value)} />
+                        </label>
+                        <label>Confirm Password:
+                            <input type="password-confirm"
+                                id="password_confirmation"
+                                placeholder="enter password again"
+                                value={password_confirmation}
+                                onChange={e => setPasswordConfirmation(e.target.value)} />
+                        </label>
+                        <button type="submit" >Submit</button>
+                    </form>
+                    {error ? <div>{error}</div> : null}
+                </div>
+            </div>
+        </>
     )
 }
 

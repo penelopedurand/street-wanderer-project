@@ -13,7 +13,7 @@ function NewMarker(props) {
     const [catId, setCatId] = useState() // change this so that it can be a part of a drop down option
     const [cats, setCats] = useState([]) // fetch for cats to map for options in dropdown 
 
-    console.log(user.id)
+    // console.log(user.id)
 
     useEffect(() => {
 
@@ -44,6 +44,7 @@ function NewMarker(props) {
                 user_id: user.id
             })
         }).then(res => res.json())
+            .then(window.location.reload(true))
             .then(data => {
                 if (data.error) {
                     setHandleError(data.error)
@@ -101,6 +102,7 @@ function NewMarker(props) {
                         <label className='label-news'>Image:<input className='input' type="text" placeholder='Add an image' name="image" value={image} onChange={handleImgChange} /></label>
                         <label className='label-news'>Longitude:<input className='input' type="text" name="longitude" value={long} onChange={handleLngChange} /></label>
                         <label className='label-news'>Latitude:<input className='input' type="text" name="latitude" value={lati} onChange={handleLatChange} /></label>
+                        <label className='label-news'>Wanderer Name: </label>
                         <select onChange={handleCatChange}>
                             <option value="⬇️ Select a Cat ⬇️">-- Select a Cat -- </option>
                             {catOption}

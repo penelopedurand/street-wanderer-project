@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from "react";
-import { Card } from "semantic-ui-react";
+// import { Card, Button } from 'react-bootstrap';
+
 
 function CatProfile({ cats, cat, filteredDeletedCat, onUpdatedCat, filteredDeletedMarker }) {
     // console.log(cats)
@@ -58,16 +59,19 @@ function CatProfile({ cats, cat, filteredDeletedCat, onUpdatedCat, filteredDelet
 
     return (
         <>
-            <Card>
-                <div className="cat-card" >
-                    <br></br>
+            <div className="cat-grid-item">
+                <br></br>
+                <div class="card">
                     <p>Name of Wanderer: </p>
                     <p className="intro">{cat.name}</p>
                     <img className="cat-image" src={cat.image}></img>
                     <div>
-                        <button className="see-cat-info" onClick={showCatIn}>
-                            See more information
+                        {showCat ? <button className="see-cat-info" onClick={showCatIn}>
+                            ⚠️ Hide Information ⚠️
+                        </button> : <button className="see-cat-info" onClick={showCatIn}>
+                            🔎 See more information 🔎
                         </button>
+                        }
                         {showCat ? (<div className="see-cat">
                             <p>They have an owner: </p>
                             <p className="intro">{String(cat.has_owner)}</p>
@@ -84,54 +88,66 @@ function CatProfile({ cats, cat, filteredDeletedCat, onUpdatedCat, filteredDelet
                         </div>
                         ) : null}
                     </div>
-                    <br></br>
-                    <button className="edit-cat" onClick={showFor}>
-                        <img src="./edit.jpg" /> Edit Cat
+                    {/* <br></br> */}
+                    {showForm ? <button className="edit-cat" onClick={showFor}>
+                        ❌ Cancel Edit ❌
+                    </button> : <button className="edit-cat" onClick={showFor}>
+                        ✏️ Edit Wanderer ✏️
                     </button>
-                    <div>
-                        {showForm ? (<div className="update-cat">
-                            <form className="update-cat-form" onSubmit={handleUpdate}>
-                                <label>
-                                    Name of Wanderer:
-                                    <input class="cat-name-update" type="text" name="nameOfCat" onChange={e => setName(e.target.value)} value={name} />
-                                    They have an owner:
-                                    <select className="form-control" name="owner" value={owner} onChange={e => setOwner(e.target.value)}>
-                                        <option value="⬇️ Select a Response ⬇️"> --Do they have an owner?-- </option>
-                                        <option value="False"> False </option>
-                                        <option value="True"> True </option>
-                                    </select>
-                                    They are fixed:
-                                    <select className="form-control" name="owner" value={fixed} onChange={e => setFixed(e.target.value)}>
-                                        <option value="⬇️ Select a Response ⬇️"> --Are they fixed?-- </option>
-                                        <option value="False"> False </option>
-                                        <option value="True"> True </option>
-                                    </select>
-                                    Last Vet Visit:
-                                    <input
-                                        className="vet-visit"
-                                        type="text"
-                                        placeholder='Last vet visit date'
-                                        value={vet}
-                                        onChange={e => setVet(e.target.value)}>
-                                    </input>
-                                </label>
-                                Vet Diagnosis:
-                                <input
-                                    className="vet-dia"
-                                    type="text"
-                                    placeholder='Any diagnosis?'
-                                    value={dia}
-                                    onChange={e => setDia(e.target.value)}>
-                                </input>
-                                <button type="submit" className="btn-submit">Submit Update</button>
-                            </form>
-                        </div>
-                        ) : null}
-                    </div>
-                    <br></br>
-                    <button className="delete-cat" onClick={handleDelete}>Delete Wanderer Profile</button>
+                    }
                 </div>
-            </Card>
+                <div>
+                    {showForm ? (<div className="update-cat">
+                        <form className="update-cat-form" onSubmit={handleUpdate}>
+                            <label>
+                                Name of Wanderer:
+                                <input class="cat-name-update" type="text" name="nameOfCat" onChange={e => setName(e.target.value)} value={name} />
+                                <br></br>
+                                They have an owner:
+                                <select className="form-control" name="owner" value={owner} onChange={e => setOwner(e.target.value)}>
+                                    <option value="⬇️ Select a Response ⬇️"> --Do they have an owner?-- </option>
+                                    <option value="False"> False </option>
+                                    <option value="True"> True </option>
+                                </select>
+                                <br></br>
+                                They are fixed:
+                                <br></br>
+                                <select className="form-control" name="owner" value={fixed} onChange={e => setFixed(e.target.value)}>
+                                    <option value="⬇️ Select a Response ⬇️"> --Are they fixed?-- </option>
+                                    <option value="False"> False </option>
+                                    <option value="True"> True </option>
+                                </select>
+                                <br></br>
+                                Last Vet Visit:
+                                <br></br>
+                                <input
+                                    className="vet-visit"
+                                    type="text"
+                                    placeholder='Last vet visit date'
+                                    value={vet}
+                                    onChange={e => setVet(e.target.value)}>
+                                </input>
+                            </label>
+                            <br></br>
+                            Vet Diagnosis:
+                            <br></br>
+                            <input
+                                className="vet-dia"
+                                type="text"
+                                placeholder='Any diagnosis?'
+                                value={dia}
+                                onChange={e => setDia(e.target.value)}>
+                            </input>
+                            <br></br>
+                            <button type="submit" className="btn-submit">Submit Update</button>
+                        </form>
+                        <br></br>
+                    </div>
+                    ) : null}
+                </div>
+                {/* <br></br> */}
+                <button className="delete-cat" onClick={handleDelete}> 🗑 Delete Wanderer Profile 🗑 </button>
+            </div>
         </>
     )
 }

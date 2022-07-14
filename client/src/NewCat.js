@@ -33,6 +33,7 @@ function NewCat(handleNewCatForm) {
         })
             .then(r => r.json())
             .then(data => handleNewCatForm(data))
+            .then(window.location.reload(true))
 
         setName("")
         setOwner(false)

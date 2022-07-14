@@ -1,20 +1,27 @@
 import React from 'react'
+import { useState, useEffect } from "react";
 import CatProfile from './CatProfile';
-import { Card } from "semantic-ui-react";
 
 function CatContainer({ cats, filteredDeletedCat, onUpdatedCat, filteredDeletedMarker }) {
+    // const [cats, setCats] = useState()
 
-    let catList = cats.map((cat) => (
+    // useEffect(() => {
+    //     fetch('/cats')
+    //         .then(res => res.json())
+    //         .then(setCats);
+    // }, []);
+
+    const catList = cats.map((cat) => (
         <CatProfile key={cat.id} cat={cat} cats={cats} filteredDeletedMarker={filteredDeletedMarker} filteredDeletedCat={filteredDeletedCat} onUpdatedCat={onUpdatedCat} />
     )
     )
 
     return (
         <>
-            <Card.Group itemsPerRow={5} cats={cats}>
-                <h1>List of Street Wanderers</h1>
+            <h1 className='card-container'>List of Street Wanderers</h1>
+            <div className="cat-grid-container">
                 {catList}
-            </Card.Group>
+            </div>
         </>
     )
 }
