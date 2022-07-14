@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import NewCat from './NewCat';
 
 
@@ -13,7 +14,12 @@ function NewMarker(props) {
     const [catId, setCatId] = useState() // change this so that it can be a part of a drop down option
     const [cats, setCats] = useState([]) // fetch for cats to map for options in dropdown 
 
-    // console.log(user.id)
+    const history = useHistory()
+
+    function handleSeeCats(e) {
+        history.push("/cats")
+        { window.scrollTo({ top: 0, left: 0 }) }
+    }
 
     useEffect(() => {
 
@@ -83,7 +89,8 @@ function NewMarker(props) {
         setLong(lng)
         setLati(lat)
     }, [lng, lat])
-    console.log(handleError)
+    // console.log(handleError)
+
 
 
     return (
@@ -111,12 +118,14 @@ function NewMarker(props) {
                             {catOption}
                         </select>
                         <br></br>
-                        <button>✔️ Submit ✔️</button>
+                        <br></br>
+                        <button className='button-marker'>✔️ Submit ✔️</button>
                     </fieldset>
                 </form>
             </div>
             <h4>{handleError}</h4>
-
+            <br></br>
+            <button className="button" onClick={handleSeeCats}>Click here to see all cats!</button>
         </>
     )
 }

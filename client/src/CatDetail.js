@@ -1,14 +1,15 @@
 import React from 'react'
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
 function CatDetail({ cats, selectedMark }) {
     const { id } = useParams();
 
-    // console.log(selectedMark.cat.has_owner)
+    const history = useHistory()
 
-    // const catDetails = cats.filter(cat => cat.id == id);
-    // console.log(catDetails)
-
+    function handleCats(e) {
+        history.push("/cats")
+        { window.scrollTo({ top: 0, left: 0 }) }
+    }
     return (
         <>
             <br></br>
@@ -26,6 +27,8 @@ function CatDetail({ cats, selectedMark }) {
                     <p className="intro" >{String(selectedMark.cat.has_owner)}</p>
                 </div>
             </div>
+            <br></br>
+            <button className="button-details" onClick={handleCats}>Back to all cats!</button>
         </>
     )
 }

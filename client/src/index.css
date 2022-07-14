@@ -1,6 +1,7 @@
 html {
   font-size: 20px;
   margin: 0;
+  letter-spacing: 0.5px;
   overflow-x: hidden;
   /* background: linear-gradient(#0B4C5F 0%, #04B4AE 52%, #0c0207 100%); */
   background-color: #bf3a30;
@@ -17,16 +18,6 @@ html {
   font-family: 'Arima', cursive;
 }
 
-/* background: #0c0207 */
-
-/* #marco {
-  width: auto;
-  height: auto;
-  margin: 0 auto;
-  overflow: hidden;
-  border-radius: 5px;
-  margin-top: 3em;
-} */
 
 #cielo {
   border-radius: 120px;
@@ -257,9 +248,9 @@ html {
   background-color: #cad8e5;
   padding: 4px;
   border-radius: 6px;
-  margin-left: 15%;
+  margin-left: 9%;
   margin-right: 3%;
-  border: 0.9px solid;
+  border: 0.8px solid;
   border-color: #4a3152;
 }
 
@@ -290,6 +281,9 @@ html {
 
 .card-container {
   text-align: center;
+  /* color: #f2e4f3; */
+  /* color: #161516; */
+  color: #280328;
 }
 
 /*signup  */
@@ -366,4 +360,181 @@ html {
 
 .bold {
   font-weight: bold;
+}
+
+/* button add marker*/
+.button {
+  font-size: 20px;
+  font-weight: 200;
+  letter-spacing: 1px;
+  padding: 13px 20px 10px;
+  outline: 0;
+  border: 1px solid #4a3152;
+  color: rgb(250, 248, 251);
+  font-family: 'Rubik Moonrocks', cursive;
+  cursor: pointer;
+  position: relative;
+  margin-left: 35%;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.button::after {
+  content: "";
+  /* background-color: #ffe54c; */
+  background-color: #726cf8;
+  background-image: linear-gradient(315deg, #726cf8 0%, #e975a8 74%);
+  width: 100%;
+  z-index: -1;
+  position: absolute;
+  height: 100%;
+  top: 7px;
+  left: 7px;
+  transition: 0.2s;
+}
+
+.button:hover::after {
+  top: 0px;
+  left: 0px;
+}
+
+/* button go home*/
+.button-home {
+  font-size: 20px;
+  font-weight: 200;
+  letter-spacing: 1px;
+  padding: 13px 20px 10px;
+  outline: 0;
+  border: 1px solid #4a3152;
+  color: rgb(250, 248, 251);
+  font-family: 'Rubik Moonrocks', cursive;
+  cursor: pointer;
+  position: relative;
+  margin-left: 40%;
+  background-color: rgba(236, 236, 236, 0);
+}
+
+.button-home::after {
+  content: "";
+  /* background-color: #ffe54c; */
+  background-color: #726cf8;
+  background-image: linear-gradient(315deg, #726cf8 0%, #e975a8 74%);
+  width: 100%;
+  z-index: -1;
+  position: absolute;
+  height: 100%;
+  top: 7px;
+  left: 7px;
+  transition: 0.2s;
+}
+
+.button-home:hover::after {
+  top: 0px;
+  left: 0px;
+}
+
+
+
+/* button go to sightings*/
+.button-encounter {
+  font-size: 20px;
+  font-weight: 200;
+  letter-spacing: 1px;
+  padding: 13px 20px 10px;
+  outline: 0;
+  border: 1px solid #4a3152;
+  color: rgb(250, 248, 251);
+  font-family: 'Rubik Moonrocks', cursive;
+  cursor: pointer;
+  position: relative;
+  margin-left: 38%;
+  background-color: rgba(236, 236, 236, 0);
+}
+
+.button-encounter::after {
+  content: "";
+  /* background-color: #ffe54c; */
+  background-color: #726cf8;
+  background-image: linear-gradient(315deg, #726cf8 0%, #e975a8 74%);
+  width: 100%;
+  z-index: -1;
+  position: absolute;
+  height: 100%;
+  top: 7px;
+  left: 7px;
+  transition: 0.2s;
+}
+
+.button-encounter:hover::after {
+  top: 0px;
+  left: 0px;
+}
+
+
+
+
+
+/* button go to details*/
+.button-details {
+  font-size: 20px;
+  font-weight: 200;
+  letter-spacing: 1px;
+  padding: 13px 20px 10px;
+  outline: 0;
+  border: 1px solid #4a3152;
+  color: rgb(250, 248, 251);
+  font-family: 'Rubik Moonrocks', cursive;
+  cursor: pointer;
+  position: relative;
+  margin-left: 40%;
+  background-color: rgba(236, 236, 236, 0);
+}
+
+.button-details::after {
+  content: "";
+  /* background-color: #ffe54c; */
+  background-color: #726cf8;
+  background-image: linear-gradient(315deg, #726cf8 0%, #e975a8 74%);
+  width: 100%;
+  z-index: -1;
+  position: absolute;
+  height: 100%;
+  top: 7px;
+  left: 7px;
+  transition: 0.2s;
+}
+
+.button-details:hover::after {
+  top: 0px;
+  left: 0px;
+}
+
+
+
+
+
+/* button submit marker*/
+.button-marker {
+  font-size: 15px;
+  background-color: #f6bad4;
+  letter-spacing: 1px;
+  padding: 5px 10px 5px;
+  border: 1.3px solid #4a3152;
+  color: #4a3152;
+  font-family: 'Rubik Moonrocks', cursive;
+  border-radius: 6px;
+}
+
+
+
+/* button all cats*/
+.button-all-cats {
+  font-size: 13px;
+  background-color: #f8e1eb;
+  letter-spacing: 1px;
+  padding: 2px 4px 2px;
+  border: 1px solid #4a3152;
+  margin-top: 3%;
+  color: #4a3152;
+  font-family: 'Rubik Moonrocks', cursive;
+  border-radius: 4px;
 }

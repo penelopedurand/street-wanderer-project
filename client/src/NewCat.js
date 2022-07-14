@@ -126,8 +126,8 @@ function NewCat(handleNewCatForm) {
                                 value={img}
                                 onChange={e => setImg(e.target.value)}>
                             </input>
-                        </label><br></br>
-                        <button>✔️ Submit ✔️</button>
+                        </label><br></br><br></br>
+                        <button className='button-marker'>✔️ Submit ✔️</button>
                     </fieldset>
 
                 </form>

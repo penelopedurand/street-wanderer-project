@@ -67,9 +67,9 @@ function CatProfile({ cats, cat, filteredDeletedCat, onUpdatedCat, filteredDelet
                     <p className="intro">{cat.name}</p>
                     <img className="cat-image" src={cat.image}></img>
                     <div>
-                        {showCat ? <button className="see-cat-info" onClick={showCatIn}>
+                        {showCat ? <button className="button-all-cats" onClick={showCatIn}>
                             ⚠️ Hide Information ⚠️
-                        </button> : <button className="see-cat-info" onClick={showCatIn}>
+                        </button> : <button className="button-all-cats" onClick={showCatIn}>
                             🔎 See more information 🔎
                         </button>
                         }
@@ -90,9 +90,9 @@ function CatProfile({ cats, cat, filteredDeletedCat, onUpdatedCat, filteredDelet
                         ) : null}
                     </div>
                     {/* <br></br> */}
-                    {showForm ? <button className="edit-cat" onClick={showFor}>
+                    {showForm ? <button className="button-all-cats" onClick={showFor}>
                         ❌ Cancel Edit ❌
-                    </button> : <button className="edit-cat" onClick={showFor}>
+                    </button> : <button className="button-all-cats" onClick={showFor}>
                         ✏️ Edit Wanderer ✏️
                     </button>
                     }
@@ -140,14 +140,14 @@ function CatProfile({ cats, cat, filteredDeletedCat, onUpdatedCat, filteredDelet
                                 onChange={e => setDia(e.target.value)}>
                             </input>
                             <br></br>
-                            <button type="submit" className="btn-submit">✅ Submit Update ✅</button>
+                            <button type="submit" className="button-all-cats">✅ Submit Update ✅</button>
                         </form>
                         <br></br>
                     </div>
                     ) : null}
                 </div>
                 {/* <br></br> */}
-                <button className="delete-cat" onClick={handleDelete}> 🗑 Delete Wanderer Profile 🗑 </button>
+                <button className="button-all-cats" onClick={handleDelete}> 🗑 Delete Wanderer Profile 🗑 </button>
             </div>
         </>
     )

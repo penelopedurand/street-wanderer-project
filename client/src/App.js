@@ -36,11 +36,25 @@ function App() {
     backgroundColor: "#f9c5d1",
     backgroundImage: "linear-gradient(315deg, #f9c5d1 0%, #9795ef 74%)",
     borderRadius: 10,
-    border: "1px solid #221c43",
+    border: "0.8px solid #221c43",
     padding: 8,
     paddingTop: 0,
     width: "auto",
     height: "auto"
+  }
+
+  const buttonPin = {
+    fontSize: "13px",
+    backgroundColor: "#f8e1eb",
+    letterSpacing: "0px",
+    padding: "0px 2px 0px",
+    border: "1px solid #4a3152",
+    color: "#4a3152",
+    fontFamily: "'Arima', cursive",
+    borderRadius: "4px",
+    fontWeight: "bold",
+    marginRight: "8px",
+    marginLeft: "8px"
   }
 
   useEffect(() => {
@@ -205,9 +219,9 @@ function App() {
                           <span className="bold">Interaction: </span>{selectedMark.description}</li>
                       </ul>
                       <Link to={`/cats/${id}`}>
-                        <button onClick={() => { window.scrollTo({ top: 90, left: 0, behavior: 'smooth' }) }}> See more </button>
+                        <button style={buttonPin} onClick={() => { window.scrollTo({ top: 90, left: 0, behavior: 'smooth' }) }}>🔎 See more 🔎</button>
                       </Link>
-                      <button onClick={(e) => handleDelete(e, selectedMark.cat_id, selectedMark.id)}>Delete</button>
+                      <button style={buttonPin} onClick={(e) => handleDelete(e, selectedMark.cat_id, selectedMark.id)}>🗑 Delete 🗑</button>
                     </div>
                   </Popup>
                 ) : null}

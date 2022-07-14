@@ -1,15 +1,15 @@
 import React from 'react'
-import { useState, useEffect } from "react";
 import CatProfile from './CatProfile';
+import { useHistory } from "react-router-dom";
 
 function CatContainer({ cats, filteredDeletedCat, onUpdatedCat, filteredDeletedMarker }) {
-    // const [cats, setCats] = useState()
 
-    // useEffect(() => {
-    //     fetch('/cats')
-    //         .then(res => res.json())
-    //         .then(setCats);
-    // }, []);
+    const history = useHistory()
+
+    function handleNewSight(e) {
+        history.push("/new_sighting_of_wanderer")
+        { window.scrollTo({ top: 0, left: 0 }) }
+    }
 
     const catList = cats.map((cat) => (
         <CatProfile key={cat.id} cat={cat} cats={cats} filteredDeletedMarker={filteredDeletedMarker} filteredDeletedCat={filteredDeletedCat} onUpdatedCat={onUpdatedCat} />
@@ -23,6 +23,8 @@ function CatContainer({ cats, filteredDeletedCat, onUpdatedCat, filteredDeletedM
             <div className="cat-grid-container">
                 {catList}
             </div>
+            <br></br>
+            <button className="button-encounter" onClick={handleNewSight}>Add new encounter!</button>
         </>
     )
 }
