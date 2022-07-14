@@ -18,6 +18,7 @@ function CatContainer({ cats, filteredDeletedCat, onUpdatedCat, filteredDeletedM
 
     return (
         <>
+            <br></br>
             <h1 className='card-container'>List of Street Wanderers</h1>
             <div className="cat-grid-container">
                 {catList}

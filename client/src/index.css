@@ -2,7 +2,9 @@ html {
   font-size: 20px;
   margin: 0;
   overflow-x: hidden;
-  background: linear-gradient(to bottom, #0B4C5F 0%, #04B4AE 52%, #0c0207 100%);
+  /* background: linear-gradient(#0B4C5F 0%, #04B4AE 52%, #0c0207 100%); */
+  background-color: #bf3a30;
+  background-image: linear-gradient(315deg, #bf3a30 0%, #864ba2 74%);
   background-size: cover;
   /* background-repeat: no-repeat;
   background-color: linear-gradient(to bottom, #0B4C5F 0%, #04B4AE 52%, #0c0207 100%); */
@@ -247,14 +249,14 @@ html {
 .navbar a {
   margin-top: 0.5%;
   text-decoration: none;
-  color: #3f484b;
+  color: #4a3152;
   background-color: #cad8e5;
   padding: 4px;
-  border-radius: 7px;
+  border-radius: 6px;
   margin-left: 15%;
   margin-right: 3%;
   border: 0.9px solid;
-  border-color: #3f484b;
+  border-color: #4a3152;
 }
 
 .cat-grid-container {
@@ -264,32 +266,27 @@ html {
   grid-row-gap: 20px;
   grid-column-gap: 20px;
   flex-wrap: wrap;
-  /* column-gap: 50px; */
-  /* row-gap: 20px; */
-  /* padding: 10px;
-  margin: auto; */
   justify-content: center;
-  /* gap: 1rem; */
-  /* grid-auto-flow: column; */
 }
 
 /*Blocks for cat individually */
 .cat-grid-item {
-  background: rgba(175, 191, 233, 0.6);
-  border: 3px solid #221c43;
+  /* background: rgba(175, 191, 233, 0.6); */
+  background-color: #f9c5d1;
+  background-image: linear-gradient(315deg, #f9c5d1 0%, #9795ef 74%);
+  border: 2px solid #221c43;
   padding: 8px;
   padding-top: 0px;
   font-size: 20px;
   text-align: center;
   width: 300px;
   height: auto;
-  /* margin: auto; */
   border-radius: 10px;
 }
 
-/* .card-container {
+.card-container {
   text-align: center;
-} */
+}
 
 /*signup  */
 .signup-form {
@@ -306,4 +303,14 @@ html {
   flex-direction: column;
   margin-top: -23em;
   overflow-x: hidden;
+}
+
+.home {
+  background-color: #f9c5d1;
+  background-image: linear-gradient(315deg, #f9c5d1 0%, #9795ef 74%);
+  border-radius: 10px;
+  text-align: center;
+  border: 1px solid #221c43;
+  padding: 8px;
+  padding-top: 0px;
 }
