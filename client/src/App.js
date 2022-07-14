@@ -118,7 +118,8 @@ function App() {
 
   function handleClose(e) {
     setSelectedMark(null)
-    // window.location.reload(true)
+    history.push("/cats")
+    { window.scrollTo({ top: 5000, left: 0 }) }
   }
   // console.log(selectedMark)
 
@@ -153,7 +154,7 @@ function App() {
           </Route>
 
           <div>
-            {user ? (<div className="map">
+            {user && !showDetailsPage ? (<div className="map">
               <ReactMapGL onClick={(e) => {
                 setLng(e.lngLat.lng)
                 setLat(e.lngLat.lat)
@@ -205,7 +206,7 @@ function App() {
                 ) : null}
               </ReactMapGL>
             </div>
-            ) : <div></div>}
+            ) : null}
           </div>
 
         </div>
