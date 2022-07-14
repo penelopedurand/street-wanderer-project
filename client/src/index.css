@@ -258,14 +258,18 @@ html {
 }
 
 .cat-grid-container {
-  display: grid;
-  grid-row: repeat(2, 1fr);
-  column-gap: 50px;
-  row-gap: 20px;
-  padding: 10px;
-  margin: auto;
+  display: flex;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-row-gap: 20px;
+  grid-column-gap: 20px;
+  flex-wrap: wrap;
+  /* column-gap: 50px; */
+  /* row-gap: 20px; */
+  /* padding: 10px;
+  margin: auto; */
   justify-content: center;
-  gap: 1rem;
+  /* gap: 1rem; */
   /* grid-auto-flow: column; */
 }
 
@@ -283,9 +287,9 @@ html {
   border-radius: 10px;
 }
 
-.card-container {
+/* .card-container {
   text-align: center;
-}
+} */
 
 /*signup  */
 .signup-form {

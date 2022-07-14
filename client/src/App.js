@@ -118,6 +118,7 @@ function App() {
 
   function handleClose(e) {
     setSelectedMark(null)
+    // window.location.reload(true)
   }
   // console.log(selectedMark)
 
