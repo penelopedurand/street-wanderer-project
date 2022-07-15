@@ -61,19 +61,20 @@ function Login({ setUser, setIsAuthenticated }) {
                         <h3>Login here! </h3>
                         <label htmlFor="username" className="username-2">Username:  </label>
                         <input
+                            className="input-login"
                             type="text"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
                         /><br></br>
                         <label className="password-2">Password:  </label>
-                        <input
+                        <input className="input-login"
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
-                        <button type="submit" className="multi-purpose-button">Login</button>
+                        <button type="submit" className="button-login">Login</button>
                         <br></br>
-                        <button type="login-button" className="multi-purpose-button" onClick={handleGoToSignUp}>Click Here to Signup</button>
+                        <button type="login-button" className="button-login" onClick={handleGoToSignUp}>Click Here to Signup</button>
                     </form>
                     {error ? <div>{error}</div> : null}
                 </div>

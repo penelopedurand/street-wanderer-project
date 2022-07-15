@@ -538,3 +538,51 @@ html {
   font-family: 'Rubik Moonrocks', cursive;
   border-radius: 4px;
 }
+
+
+/* login page */
+.input-login {
+  background-color: #fae0e5;
+  /* background-image: linear-gradient(315deg, #a5a3e0 74% #f9c5d1 0%, ); */
+  border-radius: 7px;
+  text-align: center;
+  border: 1px solid #221c43;
+  margin-right: 2px;
+  margin-bottom: 1px;
+}
+
+/* signup page */
+.input-signup {
+  background-color: #fae0e5;
+  /* background-image: linear-gradient(315deg, #a5a3e0 74% #f9c5d1 0%, ); */
+  border-radius: 7px;
+  text-align: center;
+  border: 1px solid #221c43;
+  margin-left: 1px;
+  margin-right: 7px;
+  margin-bottom: 1px;
+}
+
+/* button login button*/
+.button-login {
+  font-size: 15px;
+  background-color: #f6bad4;
+  letter-spacing: 1px;
+  /* padding: 5px 10px 5px; */
+  border: 1.3px solid #4a3152;
+  color: #4a3152;
+  font-family: 'Rubik Moonrocks', cursive;
+  border-radius: 6px;
+}
+
+/* button signup button*/
+.button-signup {
+  font-size: 15px;
+  background-color: #f6bad4;
+  letter-spacing: 1px;
+  /* padding: 5px 10px 5px; */
+  border: 1.3px solid #4a3152;
+  color: #4a3152;
+  font-family: 'Rubik Moonrocks', cursive;
+  border-radius: 6px;
+}

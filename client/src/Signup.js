@@ -49,26 +49,26 @@ function Signup({ setUser }) {
                     <br></br>
                     <form onSubmit={handleSubmit} className="signup-form">
                         <h2> 🌇 🐈 Welcome  to  The  Streets! 🐈‍⬛ 🏙 </h2>
-                        <button onClick={handleBack} className="login-page-button"> Already a user? Log in here </button>
+                        <button onClick={handleBack} className="button-signup"> Already a user? Log in here </button>
                         <h4 className="signup-text">New user? Sign up below!</h4>
                         <label>Username:
-                            <input type="text" id="username" placeholder="enter username here" value={username}
+                            <input className="input-signup" type="text" id="username" placeholder="enter username here" value={username}
                                 onChange={e => setUsername(e.target.value)} />
                         </label>
                         <label>Password:
-                            <input type="password" id="password"
+                            <input className="input-signup" type="password" id="password"
                                 placeholder="enter password here"
                                 value={password}
                                 onChange={e => setPassword(e.target.value)} />
                         </label>
                         <label>Confirm Password:
-                            <input type="password-confirm"
+                            <input className="input-signup" type="password-confirm"
                                 id="password_confirmation"
                                 placeholder="enter password again"
                                 value={password_confirmation}
                                 onChange={e => setPasswordConfirmation(e.target.value)} />
                         </label>
-                        <button type="submit" >Submit</button>
+                        <button className="button-signup" type="submit" >Submit</button>
                     </form>
                     {error ? <div>{error}</div> : null}
                 </div>
