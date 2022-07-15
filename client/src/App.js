@@ -151,7 +151,11 @@ function App() {
     history.push("/cats")
     { window.scrollTo({ top: 5000, left: 0 }) }
   }
+
+
+
   // console.log(selectedMark)
+
 
   return (
     <>

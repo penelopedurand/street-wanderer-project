@@ -62,7 +62,7 @@ function CatProfile({ cats, cat, filteredDeletedCat, onUpdatedCat, filteredDelet
         <>
             <div className="cat-grid-item">
                 <br></br>
-                <div class="card">
+                <div className="card">
                     <p>Name of Wanderer: </p>
                     <p className="intro">{cat.name}</p>
                     <img className="cat-image" src={cat.image}></img>
