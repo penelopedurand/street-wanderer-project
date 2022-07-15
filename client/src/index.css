@@ -124,7 +124,7 @@ html {
   background: url('https://res.cloudinary.com/pastelitos/image/upload/v1610526571/eva/gatito_pushui.svg');
   height: 297px;
   width: 507.5px;
-  margin-top: 12.5em;
+  margin-top: 23.8%;
   margin-left: 2em;
   z-index: 10;
   -webkit-animation: sprite-animation 1.2s steps(16, end) infinite;
@@ -248,8 +248,8 @@ html {
   background-color: #cad8e5;
   padding: 4px;
   border-radius: 6px;
-  margin-left: 9%;
-  margin-right: 3%;
+  margin-left: 6%;
+  margin-right: 6%;
   border: 0.8px solid;
   border-color: #4a3152;
 }
