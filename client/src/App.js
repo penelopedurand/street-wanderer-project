@@ -110,6 +110,7 @@ function App() {
 
   // delete the cat marker
   function handleDelete(e, cat_id, marker_id) {
+    e.preventDefault();
     fetch(`/cats/${cat_id}`, {
       method: 'DELETE',
     }).then(res => res.json())
@@ -118,8 +119,12 @@ function App() {
         const filteredMarkers = mapData.filter(marker => marker.id !== marker_id);
         setCats(filteredCats)
         setMapData(filteredMarkers)
-      }
-      );
+      })
+    //   (window.reload(true))
+    // window.scrollTo({ top: 5000, left: 0 })
+    // history.push("/cats")
+    // window.location.reload(true);
+    // { window.scrollTo({ top: 5000, left: 0 }) }
     // filteredDeletedMarker(mapData.id)
   }
 
